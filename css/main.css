@@ -1,0 +1,51 @@
+body {
+  font: menu;
+  background: #444;
+  color: #ebebeb;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: flex;
+
+}
+
+#map {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#legend {
+  min-width: 400px;
+  margin: 2em;
+}
+
+.card {
+  box-shadow: 0 4px 16px rgba(12,12,13,.1);
+  border-radius: 2px;
+  padding: 5px;
+  background: #222;
+}
+
+.toggle {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  transition: all 0.1s;
+  border-radius: 1em;
+  background-color: #555;
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8" fill="white"/></svg>');
+  background-size: 1.1em 1.1em;
+  background-repeat: no-repeat;
+  background-position: 0.25em center;
+  width: 3em;
+  height: 1.5em;
+  font: inherit;
+}
+
+.toggle:checked {
+  background-color: #12bc00;
+  background-position-x: right 0.25em;
+}
