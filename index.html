@@ -7,34 +7,65 @@
   <meta name="author" content="Pierre Assemat, Tim Nguyen, Ouiame Talbi">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css">
+  <!-- <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"> -->
 
-
+  <!-- <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script> -->
+  <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
   <title>Amazon Data Visualisation</title>
 
   <link href="css/main.css" rel="stylesheet">
 </head>
 
 <body>
-  <header>
-    <h1>Natural Resilience in the Amazon</h1>
-  </header>
-  <main>
-    <div id="map"></div>
-    <div class="card" id="legend">
-      <h2>Toggles</h2>
+  <div id="layout">
+    <header>
+      <div id="header">
+        <h1>Natural Resilience in the Amazon</h1>
+      </div>
+    </header>
+    <!-- <main>
+      <div id="map1"></div>
 
-      <input type="checkbox" class="toggle"/>
-      <input type="checkbox" class="toggle"/>
-      <input type="checkbox" class="toggle"/>
-      <input type="checkbox" class="toggle"/>
-      <input type="checkbox" class="toggle"/>
+    </main> -->
+    <div id=map-container>
+      <div class="card" id="legend">
+        <h2>Toggles</h2>
 
+        <input type="checkbox" id="AOI-percountry" class="toggle"/>
+        <input type="checkbox" class="toggle"/>
+        <input type="checkbox" class="toggle"/>
+        <input type="checkbox" class="toggle"/>
+        <input type="checkbox" class="toggle"/>
+
+      </div>
+      <div id="map"></div>
+      <!-- <div id="loader">
+        <div class="CDB-LoaderIcon CDB-LoaderIcon--big">
+          <svg class="CDB-LoaderIcon-spinner" viewBox="0 0 50 50">
+            <circle class="CDB-LoaderIcon-path" cx="25" cy="25" r="20" fill="none"></circle>
+          </svg>
+        </div>
+      </div> -->
     </div>
-  </main>
+    <footer>
+      <p>
+        Copyright Pierre Assemat
+      </p>
+    </footer>
+  </div>
+
 </body>
+<!--
+  Use geojson-vt to use tiles vector with geoJson files in order to render
+  the map depending on the effective zoom level
+ -->
+<!-- <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script> -->
 <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
 <script src="js/script.js"></script>
+<script src="js/constants.js" type="module"></script>
 <script src="lib/d3.min.js"></script>
 
 </html>
