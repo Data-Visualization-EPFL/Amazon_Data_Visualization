@@ -11,7 +11,8 @@ function $$(sel) {
 class RealMap {
   constructor(ctn) {
     this.urls = {
-      'AOI-percountry': 'data/AOI/AOI_percountry.geojson'
+      'AOI-percountry': 'data/AOI_percountry.geojson',
+      'land-use-contour': 'data/contourLandUse.geojson'
     }
     this.layers = [];
     this.container = ctn;
@@ -97,7 +98,8 @@ class RealMap {
 document.addEventListener("DOMContentLoaded", () => {
 	console.log("Start of the page");
   const urls = {
-    'AOI-percountry': 'data/AOI/AOI_percountry.geojson'
+    'AOI-percountry': 'data/AOI_percountry.geojson',
+    'land-use-contour': 'data/contourLandUse.geojson'
   }
   if (window.Worker) {
     const myWorker = new Worker('worker.js');
