@@ -10,17 +10,20 @@ function $$(sel) {
 
 class RealMap {
   constructor(ctn) {
+    this.map = null;
     this.urls = {
       'AOI-percountry': 'data/AOI_percountry.geojson',
       'land-use-contour': 'data/contourLandUse.geojson'
     }
-    this.layers = [];
+    this.layers = {};
     this.container = ctn;
-    this.layers.push(new ol.layer.Tile({source: new ol.source.OSM()}))
+    this.layers['basemap'] = new ol.layer.Tile({source: new ol.source.OSM()});
     $("#AOI-percountry").onchange = (e) => {
       const layer = e.target.id;
-      if (this.layers.includes(this.urls[layer])) {
-        this.layers.pop(this.urls[layer]);
+      console.log(this.layers);
+      if (this.layers[this.urls[layer]]) {
+        this.map.removeLayer(this.layers[this.urls[layer]]);
+        delete this.layers[this.urls[layer]];
       } else {
         this.addNewLayer(this.urls[layer]);
       }
@@ -37,18 +40,25 @@ class RealMap {
       }),
       // style: style
     });
-    this.layers.push(vector);
+    this.layers[url] = vector;
   }
 
   drawMap() {
-    new ol.Map({
-      layers: this.layers,
-      target: this.container.id,
-      view: new ol.View({
-        center: ol.proj.fromLonLat([-68.45, -12.92]),
-        zoom: 5
-      })
-    });
+    if (this.map) {
+      Object.keys(this.layers).forEach(key => {
+        if(key !== 'basemap') this.map.addLayer(this.layers[key]);
+      });
+      this.map.render();
+    } else {
+      this.map = new ol.Map({
+        layers: Object.values(this.layers),
+        target: this.container.id,
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-68.45, -12.92]),
+          zoom: 5
+        })
+      });
+    }
   }
 }
 
