@@ -1,4 +1,3 @@
-// import * from './constants.js';
 
 function $(sel) {
   return document.querySelector(sel);
@@ -8,57 +7,76 @@ function $$(sel) {
   return document.querySelectorAll(sel);
 }
 
+const LAYER_MAP = {
+  'AOI-percountry': 'data/AOI_percountry.geojson',
+  'land-use-contour': 'data/contourLandUse.geojson'
+};
+const BASE_ID = "base";
+
 class RealMap {
   constructor(ctn) {
     this.map = null;
-    this.urls = {
-      'AOI-percountry': 'data/AOI_percountry.geojson',
-      'land-use-contour': 'data/contourLandUse.geojson'
-    }
     this.layers = {};
     this.container = ctn;
-    this.layers['basemap'] = new ol.layer.Tile({source: new ol.source.OSM()});
-    $("#AOI-percountry").onchange = (e) => {
-      const layer = e.target.id;
-      console.log(this.layers);
-      if (this.layers[this.urls[layer]]) {
-        this.map.removeLayer(this.layers[this.urls[layer]]);
-        delete this.layers[this.urls[layer]];
-      } else {
-        this.addNewLayer(this.urls[layer]);
+    this.layers.base = new ol.layer.Tile({source: new ol.source.OSM()});
+
+    for (let layer in LAYER_MAP) {
+      this.addLayer(layer);
+    }
+    this.renderMap();
+
+    for (let layer in LAYER_MAP) {
+      if (!$("#" + layer).checked) {
+        this.hideLayer(layer);
       }
-      this.drawMap();
+      $("#" + layer).addEventListener("change", e => {
+        this.toggleLayer(layer);
+      });
     }
   }
 
-  addNewLayer(url) {
+  addLayer(id) {
     const vector = new ol.layer.Vector({
       source: new ol.source.Vector({
-      url: url,
-      format: new ol.format.GeoJSON({ layers: ['cantons'] }),
-      overlaps: true
+        url: LAYER_MAP[id],
+        format: new ol.format.GeoJSON({ layers: ['cantons'] }),
+        overlaps: true
       }),
       // style: style
     });
-    this.layers[url] = vector;
+    this.layers[id] = vector;
   }
 
-  drawMap() {
-    if (this.map) {
-      Object.keys(this.layers).forEach(key => {
-        if(key !== 'basemap') this.map.addLayer(this.layers[key]);
-      });
-      this.map.render();
+  toggleLayer(id) {
+    const layer = this.layers[id];
+    if (!$("#" + id).checked) {
+      this.hideLayer(id);
     } else {
-      this.map = new ol.Map({
-        layers: Object.values(this.layers),
-        target: this.container.id,
-        view: new ol.View({
-          center: ol.proj.fromLonLat([-68.45, -12.92]),
-          zoom: 5
-        })
-      });
+      this.showLayer(id);
     }
+    this.map.render();
+  }
+
+  showLayer(id) {
+    this.layers[id].setVisible(true);
+  }
+
+  hideLayer(id) {
+    this.layers[id].setVisible(false);
+    // const layer = this.layers[id];
+    // this.map.removeLayer(layer);
+    // delete this.layers[id];
+  }
+
+  renderMap() {
+    this.map = new ol.Map({
+      layers: Object.values(this.layers),
+      target: this.container.id,
+      view: new ol.View({
+        center: ol.proj.fromLonLat([-68.45, -12.92]),
+        zoom: 5
+      }),
+    });
   }
 }
 
@@ -123,9 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const map = new RealMap($("#map"));
-  map.addNewLayer(urls['AOI-percountry']);
   // map.addNewLayer('data/maps/land-use.geojson');
-  map.drawMap();
   //tiles('test.geojson');
   //exemple2();
 });

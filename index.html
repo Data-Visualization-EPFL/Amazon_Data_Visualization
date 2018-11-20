@@ -32,13 +32,24 @@
     </main> -->
     <div id=map-container>
       <div class="card" id="legend">
-        <h2>Toggles</h2>
+        <h2>Map items</h2>
 
-        <input type="checkbox" id="AOI-percountry" class="toggle"/>
-        <input type="checkbox" class="toggle"/>
-        <input type="checkbox" class="toggle"/>
-        <input type="checkbox" class="toggle"/>
-        <input type="checkbox" class="toggle"/>
+        <div>
+          <input type="checkbox" id="AOI-percountry" class="toggle"/>
+          <label for="AOI-percountry">AOI percountry</label>
+        </div>
+        <div>
+          <input type="checkbox" id="land-use-contour" class="toggle"/>
+          <label for="land-use-contour">Land use contour</label>
+        </div>
+        <!-- <div>
+          <input type="checkbox" id="AOI-percountry" class="toggle"/>
+          <label for="AOI-percountry">AOI percountry</label>
+        </div>
+        <div>
+          <input type="checkbox" id="AOI-percountry" class="toggle"/>
+          <label for="AOI-percountry">AOI percountry</label>
+        </div> -->
 
       </div>
       <div id="map"></div>
@@ -65,7 +76,6 @@
 <!-- <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script> -->
 <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
 <script src="js/script.js"></script>
-<script src="js/constants.js" type="module"></script>
 <script src="lib/d3.min.js"></script>
 
 </html>
