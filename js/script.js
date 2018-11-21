@@ -8,8 +8,12 @@ function $$(sel) {
 }
 
 const LAYER_MAP = {
+  'aguajales2': 'data/aguajales2.geojson', // EPSG::32719
   'AOI-percountry': 'data/AOI_percountry.geojson',
-  'land-use-contour': 'data/contourLandUse.geojson'
+  'land-use-contour': 'data/contourLandUse.geojson',
+  'bosque-no-inundable': 'data/bosque-no-inundable.geojson',
+  'bosque-inundable': 'data/bosque-inundable.geojson',
+  'aguajales': 'data/aguajales.geojson' // EPSG::32719
 };
 const BASE_ID = "base";
 
@@ -68,6 +72,17 @@ class RealMap {
     // delete this.layers[id];
   }
 
+  plsHelp() {
+    const pt = [459123.1209, 3108334.7701];
+    const test = ol.proj.transform(pt, new ol.proj.Projection('EPSG:32719'), new ol.proj.Projection('EPSG:4326'));
+    console.log(pt, test);
+
+    var myProjectionName = 'EPSG:32719';
+    proj4.defs(myProjectionName, "+proj=utm +zone=19S +ellps=WRS84 +units=m +no_defs");
+    var myProjection = ol.proj.get(myProjectionName)
+    console.log(myProjection);
+  }
+
   renderMap() {
     this.map = new ol.Map({
       layers: Object.values(this.layers),
@@ -80,82 +95,26 @@ class RealMap {
   }
 }
 
-// function tiles(fileName) {
-//   loadJSON(function(geojson) {
-//     // build an initial index of tiles
-//     const tileIndex = geojsonvt(geojson);
-//     // request a particular tile
-//     var features = tileIndex.getTile(1, 0, 0).features;
-//     // show an array of tile coordinates created so far
-//     console.log(tileIndex.tileCoords); // [{z: 0, x: 0, y: 0}, ...]
-//   }, 'data/maps/' + fileName );
-// }
-
-// function exemple2() {
-//   const map = new mapboxgl.Map({
-//       container: 'map',
-//       style: carto.basemaps.voyager,
-//       center: [-70, 0],
-//       zoom: 4,
-//       scrollZoom: true,
-//     });
-//
-//     const nav = new mapboxgl.NavigationControl({
-//       showCompass: false
-//     });
-//     map.addControl(nav, 'top-left');
-//
-//     // Define user
-//     carto.setDefaultAuth({
-//       username: 'cartovl',
-//       apiKey: 'default_public'
-//     });
-//
-//     loadJSON(function(geojson) {
-//       const geojsonSource = new carto.source.GeoJSON(geojson);
-//       const layer = new carto.Layer('AOI-percountry', geojsonSource, new carto.Viz());
-//       layer.addTo(map);
-//       layer.on('loaded', hideLoader);
-//     }, 'data/AOI/AOI_percountry.geojson');
-//
-//     function hideLoader() {
-//       document.getElementById('loader').style.opacity = '0';
-//     }
-// }
-
 document.addEventListener("DOMContentLoaded", () => {
 	console.log("Start of the page");
-  if (window.Worker) {
-    const myWorker = new Worker('worker.js');
-    console.log(window.Worker);
-    myWorker.postMessage(true);
-
-    myWorker.onmessage = function(e) {
-  		result.textContent = e.data;
-  		console.log('Main (myWorker.onmessage): Message received from worker');
-    }
-  }
 
   $("#project-description-close-btn").onclick = () => {
-    console.log("click");
     $("#project-description-container").style.display = 'none';
-    console.log($$(".blur"));
-    console.log($$(".blur").values());
     $$(".blur").forEach((node) => node.style.filter = "blur(0px)");
   };
 
   const map = new RealMap($("#map"));
-
+  map.plsHelp();
 });
 
-function loadJSON(callback, pathToFile) {
-  var xobj = new XMLHttpRequest();
-  xobj.overrideMimeType("application/json");
-  xobj.open('GET', pathToFile, true);
-  xobj.onreadystatechange = function () {
-    if (xobj.readyState == 4 && xobj.status == "200") {
-      callback(JSON.parse(xobj.responseText));
-    }
-  };
-  xobj.send(null);
-}
+// function loadJSON(callback, pathToFile) {
+//   var xobj = new XMLHttpRequest();
+//   xobj.overrideMimeType("application/json");
+//   xobj.open('GET', pathToFile, true);
+//   xobj.onreadystatechange = function () {
+//     if (xobj.readyState == 4 && xobj.status == "200") {
+//       callback(JSON.parse(xobj.responseText));
+//     }
+//   };
+//   xobj.send(null);
+// }
