@@ -125,10 +125,6 @@ class RealMap {
 
 document.addEventListener("DOMContentLoaded", () => {
 	console.log("Start of the page");
-  const urls = {
-    'AOI-percountry': 'data/AOI_percountry.geojson',
-    'land-use-contour': 'data/contourLandUse.geojson'
-  }
   if (window.Worker) {
     const myWorker = new Worker('worker.js');
     console.log(window.Worker);
@@ -140,10 +136,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  $("#project-description-close-btn").onclick = () => {
+    console.log("click");
+    $("#project-description-container").style.display = 'none';
+    console.log($$(".blur"));
+    console.log($$(".blur").values());
+    $$(".blur").forEach((node) => node.style.filter = "blur(0px)");
+  };
+
   const map = new RealMap($("#map"));
-  // map.addNewLayer('data/maps/land-use.geojson');
-  //tiles('test.geojson');
-  //exemple2();
+
 });
 
 function loadJSON(callback, pathToFile) {

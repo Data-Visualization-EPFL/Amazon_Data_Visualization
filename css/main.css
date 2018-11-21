@@ -2,11 +2,10 @@
   --map-width: 70%;
   --map-height: 650px;
   --header-height: 100px;
-  --layout-y: 20px;
+  --layout-y: 40px;
   --layout-x: 2%;
-
-  --box-color: rgba(160, 180, 180, 0.8);
-  --box-radius: 5px;
+  --box-color: rgba(160, 180, 180, 1);
+  --box-radius: 7px;
 }
 
 body {
@@ -24,8 +23,39 @@ body {
   padding: var(--layout-y) var(--layout-x);
 }
 
+.blur, .blur:not(#project-description-container) {
+  filter: blur(6px);
+}
+
+#project-description-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  border: solid 3px rgba(120, 130, 130, 0.9);
+  border-radius: var(--box-radius);
+  padding: 1% 2%;
+  background-color: rgba(130, 140, 140, 0.9);
+  opacity: 0.9;
+  z-index: 1000;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 2em;
+  color: rgba(220, 230, 230, 0.9);
+}
+
+.close-btn:hover {
+  cursor: pointer;
+  color: rgba(180, 195, 195, 1);
+}
+
 header {
-  margin: 0;
+  margin: 0 0 10px;
   height: var(--header-height);
 }
 
@@ -37,7 +67,7 @@ header {
 
 header h1 {
   height: 65%;
-  margin: auto auto;
+  margin: auto;
   font-size: 3.4em;
   background-color: var(--box-color);
   border-radius: var(--box-radius);
@@ -46,17 +76,17 @@ header h1 {
 
 #map-container {
   height: var(--map-height);
-  border-radius: var(--box-radius);
+  border-top-left-radius: var(--box-radius);
+  border-top-right-radius: var(--box-radius);
   background-color: var(--box-color);
 }
 
 #map {
   margin: 0 auto;
-  top: calc(var(--header-height) + var(--layout-y));
-  left: calc(100% - var(--map-width)/2 - var(--layout-x));
-  transform: translateX(-50%);
-  width: var(--map-width);
-  height: var(--map-height);
+  top: var(--layout-y);
+  right: var(--layout-x);
+  width: calc(var(--map-width) - var(--layout-x));
+  height: calc(var(--map-height) - var(--layout-x));
 }
 
 #legend {
@@ -64,7 +94,6 @@ header h1 {
   height: var(--map-height);
   padding: var(--layout-y) var(--layout-x);
   border-top-left-radius: var(--box-radius);
-  border-bottom-left-radius: var(--box-radius);
   background-color: var(--box-color);
 }
 
@@ -72,18 +101,27 @@ header h1 {
   margin: 0;
 }
 
-footer {
-  width: 60%;
-  height: var(--header-height);
-  margin: 0 auto;
+#slider-container {
+  min-height: 100px;
+  width: 100%;
+  padding: 50px calc(var(--layout-x)/2);
+  border-bottom-right-radius: var(--box-radius);
+  border-bottom-left-radius: var(--box-radius);
+  background-color: var(--box-color);
+  opacity: 1;
 }
 
-footer p {
-  position: absolute;
-  bottom: 0 - (2*var(--header-height));
-  left: 50%;
-  transform: translate(-50%);
-  height: 20px;
+footer {
+  height: var(--header-height);
+}
+
+#footer-abs {
+  margin: 20px;
+}
+
+#copyright {
+  margin: 20px;
+  text-align: center;
 }
 
 .toggle {
@@ -104,4 +142,43 @@ footer p {
 .toggle:checked {
   background-color: #12bc00;
   background-position-x: right 0.25em;
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    margin: 0;
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.8; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #12bc00; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #12bc00; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.ico {
+  width: 50px;
+  height: 50px;
 }
