@@ -98,9 +98,8 @@ class RealMap {
 document.addEventListener("DOMContentLoaded", () => {
 	console.log("Start of the page");
 
-  $("#project-description-close-btn").onclick = () => {
-    $("#project-description-container").style.display = 'none';
-    $$(".blur").forEach((node) => node.style.filter = "blur(0px)");
+  $("#get-started").onclick = () => {
+    $("body").classList.remove("overlay-on");
   };
 
   const map = new RealMap($("#map"));

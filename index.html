@@ -12,49 +12,36 @@
   <!-- <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
   <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script> -->
-  <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet"/>
+  <!-- <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet"/> -->
   <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
   <title>Amazon Data Visualisation</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link href="css/main.css" rel="stylesheet">
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
 </head>
 
-<body>
-  <div id="project-description-container">
-    <h2> Project Title </h2>
-    <span id="project-description-close-btn" class="close-btn"><i class="fas fa-times"></i></span>
-    <h3> Context </h3>
+<body class="overlay-on">
+  <div id="presentation-overlay" class="overlay">
+    <h1>Welcome!</h1>
+    <h2>Context</h2>
     <p>
       Visualisation context: amazon forest destruction, land use of area of interest (Bolivia, Peru, Brazil)...
     </p>
-    <h3> How to use this Visualisation </h3>
+    <h2> How to use this Visualisation </h2>
     <p>
       This presentation is composed of 3 different parts:
       - Map of the AOI with some land use data.
       - Data insight where you will be able to see the different ratio of forest destroy for each time reference.
       - A range slider that you can manipulate in order to change the time reference and see the evolution of the land use and forest detruction years after years
     </p>
-    <h3> Extras </h3>
-    <p>
-      Extras things to tell....
-    </p>
+    <button id="get-started" class="btn btn-primary">Get started</button>
   </div>
-  <nav class="navbar navbar-dark bg-dark">
-
-  </nav>
-
-  <div id="layout" class="blur">
-    <header class="blur">
+  <div id="layout" class="flex">
+    <header>
       <div id="header">
         <h1>Natural Resilience in the Amazon</h1>
       </div>
     </header>
-    <!-- <main>
-      <div id="map1"></div>
-
-    </main> -->
-    <div id=map-container class="blur">
+    <div id="map-container" class="flex grow">
       <div id="legend">
         <h2>Map items</h2>
 
@@ -91,10 +78,10 @@
           <label for="AOI-percountry">AOI percountry</label>
         </div> -->
       </div>
-      <div id="map" class="blur"></div>
+      <div id="map" class="grow"></div>
     </div>
-    <div id="slider-container" class="blur">
-      <input type="range" list="tickmarks" min="1" max="100" value="50" class="slider">
+    <div id="slider-container">
+      <input type="range" step="10" min="1" max="100" value="0" class="slider">
       <!-- <datalist id="tickmarks">
         <option value="0" label="0%">
         <option value="10">
@@ -109,18 +96,17 @@
         <option value="100" label="100%">
       </datalist> -->
     </div>
-    <footer class="blur">
+    <footer>
+      <div id="footer-links">
+        <a href="https://naturalcapitalproject.stanford.edu/">
+          <img src="css/ico/github.png"/ class="ico">
+        </a>
+        <a href="https://github.com/Data-Visualization-EPFL/Amazon_Data_Visualization">
+          <img src="css/ico/natural-capital-project.png"/ class="ico">
+        </a>
+      </div>
+      <p id="copyright">&copy; Pierre Assemat, Tim Nguyen, Ouiame Talbi</p>
     </footer>
-  </div>
-  <div id="footer-abs">
-    <a href="https://naturalcapitalproject.stanford.edu/">
-      <img src="css/ico/github.png"/ class="ico">
-    </a>
-    <a href="https://github.com/Data-Visualization-EPFL/Amazon_Data_Visualization">
-      <img src="css/ico/natural-capital-project.png"/ class="ico">
-    </a>
-    <p id="copyright"> &copy; Pierre Assemat, Tim Nguyen, Ouiame Talbi </p>
-  </div>
 </body>
 <!--
   Use geojson-vt to use tiles vector with geoJson files in order to render

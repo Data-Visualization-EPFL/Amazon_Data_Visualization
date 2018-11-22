@@ -1,128 +1,204 @@
-:root {
-  --map-width: 70%;
-  --map-height: 650px;
-  --header-height: 100px;
-  --layout-y: 40px;
-  --layout-x: 2%;
-  --box-color: rgba(160, 180, 180, 1);
-  --box-radius: 7px;
+/* Layout */
+
+html, body {
+  height: 100%;
 }
 
 body {
   font: menu;
-  /* background: #444; */
   color: #ebebeb;
   background-image: url(images/fond.png);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
+  margin: 0;
+  padding: 0;
 }
 
 #layout {
-  margin: 0;
-  padding: var(--layout-y) var(--layout-x);
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
 }
 
-.blur, .blur:not(#project-description-container) {
-  filter: blur(6px);
+.flex {
+  display: flex;
 }
 
-#project-description-container {
+.grow {
+  flex-grow: 1;
+}
+
+/* Overlay */
+
+.overlay {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
-  border: solid 3px rgba(120, 130, 130, 0.9);
-  border-radius: var(--box-radius);
-  padding: 1% 2%;
-  background-color: rgba(130, 140, 140, 0.9);
-  opacity: 0.9;
+  max-width: 800px;
+  border-radius: 4px;
+  padding: 1em 2em;
+  background-color: rgba(255,255,255,0.95);
+  color: black;
   z-index: 1000;
+  box-shadow: 0 4px 16px rgba(12,12,13,.5);
+  display: none;
 }
 
-.close-btn {
+.overlay-on::after {
+  content: "";
   position: absolute;
-  top: 15px;
-  right: 25px;
-  font-size: 2em;
-  color: rgba(220, 230, 230, 0.9);
+  background: rgba(12,12,13,.8);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-.close-btn:hover {
-  cursor: pointer;
-  color: rgba(180, 195, 195, 1);
+.overlay-on .overlay {
+  display: block;
 }
+
+#presentation-overlay h1 {
+  text-align: center;
+}
+
+#presentation-overlay button {
+  font-size: 1.5em;
+  margin: 1em auto;
+  margin-top: 2em;
+  display: block;
+}
+
+/* Header */
 
 header {
-  margin: 0 0 10px;
-  height: var(--header-height);
-}
-
-#header {
-  max-width: 37%;
-  margin: auto auto;
-  border-radius: var(--box-radius);
+  background-color: rgba(0,0,0,0.3);
+  padding: 0 1em;
+  font-size: 3.4em;
+  text-align: center;
 }
 
 header h1 {
-  height: 65%;
-  margin: auto;
-  font-size: 3.4em;
-  background-color: var(--box-color);
-  border-radius: var(--box-radius);
-  text-align: center;
+  font-size: inherit;
 }
 
+/* Map layout */
+
 #map-container {
-  height: var(--map-height);
-  border-top-left-radius: var(--box-radius);
-  border-top-right-radius: var(--box-radius);
-  background-color: var(--box-color);
+  min-height: 0;
 }
 
 #map {
-  margin: 0 auto;
-  top: var(--layout-y);
-  right: var(--layout-x);
-  width: calc(var(--map-width) - var(--layout-x));
-  height: calc(var(--map-height) - var(--layout-x));
+  background: white;
 }
 
 #legend {
-  width: calc(100% - var(--map-width) - var(--layout-x)/2);
-  height: var(--map-height);
-  padding: var(--layout-y) var(--layout-x);
-  border-top-left-radius: var(--box-radius);
-  background-color: var(--box-color);
-}
-
-#legend h2 {
-  margin: 0;
+  min-width: 400px;
+  background-color: rgba(0,0,0,0.5);
+  padding: 1em;
+  overflow: auto;
 }
 
 #slider-container {
-  min-height: 100px;
   width: 100%;
-  padding: 50px calc(var(--layout-x)/2);
-  border-bottom-right-radius: var(--box-radius);
-  border-bottom-left-radius: var(--box-radius);
-  background-color: var(--box-color);
+  background: rgba(0,0,0,0.3);
   opacity: 1;
+  padding: 1em 0;
 }
+
+/* Footer */
 
 footer {
-  height: var(--header-height);
+  display: flex;
+  background: rgba(0,0,0,0.3);
 }
 
-#footer-abs {
-  margin: 20px;
+.ico {
+  width: 50px;
+  height: 50px;
 }
 
 #copyright {
+  flex: 1;
   margin: 20px;
   text-align: center;
 }
+
+/* Typography */
+
+h1 {
+  font-size: 3em;
+  font-weight: lighter;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: normal;
+}
+
+/* Buttons */
+
+.btn {
+  border: none;
+  border-radius: 2px;
+  background: #ededf0;
+  padding: 0.5em 1em;
+  color: #0c0c0d;
+  text-decoration: none;
+  font: inherit;
+  display: inline-block;
+  cursor: pointer;
+  line-height: initial;
+}
+
+.btn:not(:first-child) {
+  margin-left: 0.5em;
+}
+
+.btn:hover {
+  background: #d7d7db;
+}
+
+.btn:hover:active {
+  background: #b1b1b3;
+}
+
+.btn:focus {
+  box-shadow: inset 0 0 0 2px #0a84ff, 0 0 0 3px rgba(10, 132, 255, 0.3);
+  outline: none;
+}
+
+.btn-primary {
+  background: #0c0c0d;
+  color: #f9f9fa;
+}
+
+.btn-primary:hover {
+  background: #38383d;
+}
+
+.btn-primary:hover:active {
+  background: #2a2a2e;
+}
+
+.btn-error {
+  background: #ff0039;
+  color: #f9f9fa;
+}
+
+.btn-error:hover {
+  background: #d70022;
+}
+
+.btn-error:hover:active {
+  background: #a4000f;
+}
+
+/* Toggles */
 
 .toggle {
   -moz-appearance: none;
@@ -137,6 +213,7 @@ footer {
   width: 3em;
   height: 1.5em;
   font: inherit;
+  vertical-align: middle;
 }
 
 .toggle:checked {
@@ -144,41 +221,41 @@ footer {
   background-position-x: right 0.25em;
 }
 
-/* The slider itself */
+/* Sliders */
 .slider {
-    -webkit-appearance: none;  /* Override default CSS styles */
-    appearance: none;
-    width: 100%; /* Full-width */
-    height: 25px; /* Specified height */
-    margin: 0;
-    background: #d3d3d3; /* Grey background */
-    outline: none; /* Remove outline */
-    opacity: 0.8; /* Set transparency (for mouse-over effects on hover) */
-    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-    transition: opacity .2s;
-}
-
-.slider:hover {
-    opacity: 1; /* Fully shown on mouse-over */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  height: 10px;
+  margin: 0;
+  --notch-size: 3px;
+  --num-steps: 10;
+  /* Draw a vertical line to get one notch per background-image instance */
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.5) var(--notch-size),
+   transparent 0);
+  /* Offset the background so the notch aligns with the center of the slider thumb */
+  background-position: 5px center;
+  /* Repeat the background-image horizontally */
+  background-repeat: repeat-x;
+  /* Size the background to get nine visible notch instances. */
+  background-size: calc(calc(100% / var(--num-steps)) - var(--notch-size) / 2) 10px;
+  background-color: black;
+  outline: none;
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
-    appearance: none;
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: #12bc00; /* Green background */
-    cursor: pointer; /* Cursor on hover */
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #12bc00;
+  border: none;
+  border-radius: 100%;
 }
 
 .slider::-moz-range-thumb {
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: #12bc00; /* Green background */
-    cursor: pointer; /* Cursor on hover */
-}
-
-.ico {
-  width: 50px;
-  height: 50px;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #12bc00; /* Green background */
+  border: none;
+  border-radius: 100%;
 }
