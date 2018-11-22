@@ -44,57 +44,12 @@
     <div id="map-container" class="flex grow">
       <div id="legend">
         <h2>Map items</h2>
-
-        <div>
-          <input type="checkbox" id="AOI-percountry" class="toggle"/>
-          <label for="AOI-percountry">AOI percountry</label>
-        </div>
-        <div>
-          <input type="checkbox" id="land-use-contour" class="toggle"/>
-          <label for="land-use-contour">Land use contour</label>
-        </div>
-        <div>
-          <input type="checkbox" id="bosque-inundable" class="toggle"/>
-          <label for="bosque-inundable">Bosque inundable</label>
-        </div>
-        <div>
-          <input type="checkbox" id="bosque-no-inundable" class="toggle"/>
-          <label for="bosque-no-inundable">Bosque no inundable</label>
-        </div>
-        <div>
-          <input type="checkbox" id="aguajales" class="toggle"/>
-          <label for="aguajales">Aguajales</label>
-        </div>
-        <div>
-          <input type="checkbox" id="aguajales2" class="toggle"/>
-          <label for="aguajales2">Aguajales2</label>
-        </div>
-        <!-- <div>
-          <input type="checkbox" id="AOI-percountry" class="toggle"/>
-          <label for="AOI-percountry">AOI percountry</label>
-        </div>
-        <div>
-          <input type="checkbox" id="AOI-percountry" class="toggle"/>
-          <label for="AOI-percountry">AOI percountry</label>
-        </div> -->
+        <div id="categories"></div>
       </div>
       <div id="map" class="grow"></div>
     </div>
     <div id="slider-container">
       <input type="range" step="10" min="1" max="100" value="0" class="slider">
-      <!-- <datalist id="tickmarks">
-        <option value="0" label="0%">
-        <option value="10">
-        <option value="20">
-        <option value="30">
-        <option value="40">
-        <option value="50" label="50%">
-        <option value="60">
-        <option value="70">
-        <option value="80">
-        <option value="90">
-        <option value="100" label="100%">
-      </datalist> -->
     </div>
     <footer>
       <div id="footer-links">
@@ -108,11 +63,7 @@
       <p id="copyright">&copy; Pierre Assemat, Tim Nguyen, Ouiame Talbi</p>
     </footer>
 </body>
-<!--
-  Use geojson-vt to use tiles vector with geoJson files in order to render
-  the map depending on the effective zoom level
- -->
-<!-- <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.3/proj4.js"></script>
 <script src="http://epsg.io/32719.js"></script>
 <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>

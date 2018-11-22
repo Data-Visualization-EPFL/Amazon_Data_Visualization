@@ -7,13 +7,52 @@ function $$(sel) {
   return document.querySelectorAll(sel);
 }
 
+const LAYER_MAP_NAME = {
+  'AOI-percountry': 'AOI per country',
+  'land-use-contour': 'Land use contour',
+  'agricultura': 'Agriculture',
+  'agua': 'Agua',
+  'aguajales': 'Aguajales',
+  'arbustos': 'Arbustos',
+  'bosque-inundable': 'Inundable bosque',
+  'bosque-no-inundable': 'No inundable bosque',
+  'herbazal': 'Herbazal',
+  'humedales': 'Humedales',
+  'mineria': 'Mineria',
+  'other': 'Other',
+  'pasto': 'data/land-use/pasto.geojson',
+  'pasto-agricultura': 'data/land-use/pasto_agricultura.geojson',
+  'pasto-herbazal': 'data/land-use/pasto_herbazal.geojson',
+  'sabana': 'data/land-use/sabana.geojson',
+  'sabana-humedales': 'data/land-use/sabana_humedales.geojson',
+  'suela-desnudo': 'data/land-use/suela_desnudo.geojson',
+  'thb-df': 'data/land-use/thb_df.geojson',
+  'urbano': 'data/land-use/hurbano.geojson',
+  'vegetacion': 'data/land-use/vegetacio.geojson'
+};
+
 const LAYER_MAP = {
-  'aguajales2': 'data/aguajales2.geojson', // EPSG::32719
   'AOI-percountry': 'data/AOI_percountry.geojson',
-  'land-use-contour': 'data/contourLandUse.geojson',
-  'bosque-no-inundable': 'data/bosque-no-inundable.geojson',
-  'bosque-inundable': 'data/bosque-inundable.geojson',
-  'aguajales': 'data/aguajales.geojson' // EPSG::32719
+  'land-use-contour': 'data/land-use-contour.geojson',
+  'agricultura': 'data/land-use/agricultura.geojson',
+  'agua': 'data/land-use/agua.geojson',
+  'aguajales': 'data/land-use/aguajales.geojson',
+  'arbustos': 'data/land-use/arbustos.geojson',
+  'bosque-inundable': 'data/land-use/bosque_inundable.geojson',
+  'bosque-no-inundable': 'data/land-use/bosque_no_inundable.geojson',
+  'herbazal': 'data/land-use/herbazal.geojson',
+  'humedales': 'data/land-use/humedales.geojson',
+  'mineria': 'data/land-use/mineria.geojson',
+  'other': 'data/land-use/other.geojson',
+  // 'pasto': 'data/land-use/pasto.geojson',
+  // 'pasto-agricultura': 'data/land-use/pasto_agricultura.geojson',
+  // 'pasto-herbazal': 'data/land-use/pasto_herbazal.geojson',
+  // 'sabana': 'data/land-use/sabana.geojson',
+  // 'sabana-humedales': 'data/land-use/sabana_humedales.geojson',
+  // 'suela-desnudo': 'data/land-use/suela_desnudo.geojson',
+  // 'thb-df': 'data/land-use/thb_df.geojson',
+  // 'urbano': 'data/land-use/hurbano.geojson',
+  // 'vegetacion': 'data/land-use/vegetacio.geojson'
 };
 const BASE_ID = "base";
 
@@ -67,20 +106,6 @@ class RealMap {
 
   hideLayer(id) {
     this.layers[id].setVisible(false);
-    // const layer = this.layers[id];
-    // this.map.removeLayer(layer);
-    // delete this.layers[id];
-  }
-
-  plsHelp() {
-    const pt = [459123.1209, 3108334.7701];
-    const test = ol.proj.transform(pt, new ol.proj.Projection('EPSG:32719'), new ol.proj.Projection('EPSG:4326'));
-    console.log(pt, test);
-
-    var myProjectionName = 'EPSG:32719';
-    proj4.defs(myProjectionName, "+proj=utm +zone=19S +ellps=WRS84 +units=m +no_defs");
-    var myProjection = ol.proj.get(myProjectionName)
-    console.log(myProjection);
   }
 
   renderMap() {
@@ -101,19 +126,26 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#get-started").onclick = () => {
     $("body").classList.remove("overlay-on");
   };
-
+  createImputList($("#categories"));
   const map = new RealMap($("#map"));
-  map.plsHelp();
 });
 
-// function loadJSON(callback, pathToFile) {
-//   var xobj = new XMLHttpRequest();
-//   xobj.overrideMimeType("application/json");
-//   xobj.open('GET', pathToFile, true);
-//   xobj.onreadystatechange = function () {
-//     if (xobj.readyState == 4 && xobj.status == "200") {
-//       callback(JSON.parse(xobj.responseText));
-//     }
-//   };
-//   xobj.send(null);
-// }
+function createImputList(el) {
+  Object.keys(LAYER_MAP).forEach((id) => {
+    const container = document.createElement("div");
+    const input = document.createElement("input");
+    const label = document.createElement("label");
+    const text = document.createTextNode(LAYER_MAP_NAME[id]);
+
+    container.appendChild(input);
+    container.appendChild(label);
+    label.appendChild(text);
+
+    input.setAttribute("id", id);
+    input.setAttribute("class", "toggle");
+    input.setAttribute("type", "checkbox");
+    label.setAttribute("for", id);
+
+    el.appendChild(container);
+  });
+}
