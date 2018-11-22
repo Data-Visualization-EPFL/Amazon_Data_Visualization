@@ -121,8 +121,6 @@ class RealMap {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("Start of the page");
-
   $("#get-started").onclick = () => {
     $("body").classList.remove("overlay-on");
   };

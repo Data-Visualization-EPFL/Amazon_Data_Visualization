@@ -89,7 +89,7 @@ header h1 {
 /* Map layout */
 
 #map-container {
-  min-height: 0;
+  min-height: 75%;
 }
 
 #map {
@@ -98,7 +98,7 @@ header h1 {
 
 #legend {
   min-width: 400px;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.6);
   padding: 1em;
   overflow: auto;
 }
@@ -114,12 +114,22 @@ header h1 {
 
 footer {
   display: flex;
+  flex-direction: column;
   background: rgba(0,0,0,0.3);
 }
 
 .ico {
   width: 50px;
   height: 50px;
+  margin: 10px 20px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 8px;
+}
+
+#footer-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 #copyright {
