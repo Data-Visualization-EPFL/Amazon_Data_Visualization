@@ -1,3 +1,9 @@
+// import {defaults as defaultControls} from 'ol/control.js';
+// import {getWidth} from 'ol/extent.js';
+// import TileLayer from 'ol/layer/Tile.js';
+// import {fromLonLat, get as getProjection} from 'ol/proj.js';
+// import WMTS from 'ol/source/WMTS.js';
+// import WMTSTileGrid from 'ol/tilegrid/WMTS.js';
 
 function $(sel) {
   return document.querySelector(sel);
@@ -5,6 +11,10 @@ function $(sel) {
 
 function $$(sel) {
   return document.querySelectorAll(sel);
+}
+
+const TILES_URL = {
+  'root': 'data_private/maps/tiles2',
 }
 
 const LAYER_MAP_NAME = {
@@ -135,7 +145,34 @@ class RealMap {
     this.layers = {};
     this.container = ctn;
     this.layers.base = new ol.layer.Tile({source: new ol.source.OSM()});
+    var resolutions = [];
+    var matrixIds = [];
+    var proj4326 = new ol.proj.get('EPSG:4326');
+    console.log(proj4326, proj4326.getExtent());
+    var maxResolution = ol.extent.getWidth(proj4326.getExtent()) / 256;
 
+    for (var i = 0; i < 18; i++) {
+      matrixIds[i] = 'EPSG:4326:' + i;
+      resolutions[i] = maxResolution / Math.pow(2, i);
+    }
+
+    var tileGrid = new ol.tilegrid.WMTS({
+      origin: ol.proj.fromLonLat([-68.45, -12.92], 'EPSG:4326'),
+      resolutions: resolutions,
+      matrixIds: matrixIds
+    });
+    this.layers.tiles = new ol.source.WMTS({
+        url: TILES_URL.root,
+        layer: 'GEOGRAPHICALGRIDSYSTEMS.MAPS',
+        matrixSet: 'EPSG:4326',
+        format: 'image/png',
+        projection: 'EPSG:4326',
+        tileGrid: tileGrid,
+        style: 'normal',
+        // attributions: '<a href="http://www.geoportail.fr/" target="_blank">' +
+        //       '<img src="https://api.ign.fr/geoportail/api/js/latest/' +
+        //       'theme/geoportal/img/logo_gp.gif"></a>'
+      })
     for (let layer in LAYER_MAP) {
       this.addLayer(layer);
     }
@@ -197,11 +234,12 @@ class RealMap {
   }
 
   renderMap() {
+    console.log(this.layers);
     this.map = new ol.Map({
       layers: Object.values(this.layers),
       target: this.container.id,
       view: new ol.View({
-        center: ol.proj.fromLonLat([-68.45, -12.92]),
+        center: ol.proj.fromLonLat([-68.45, -12.92], 'EPSG:4326'),
         zoom: 5
       }),
     });
@@ -218,7 +256,7 @@ class RealMap {
          features[i] = new ol.Feature(new ol.geom.Point(coordinates));
        }
 
-    const source = new ol.source.VectorSource({
+    const source = new ol.source.Vector({
             features: features
           });
 
@@ -228,14 +266,14 @@ class RealMap {
           });
 
           var styleCache = {};
-          var clusters = new ol.layer.VectorLayer({
+          var clusters = new ol.layer.Vector({
             source: clusterSource,
             style: function(feature) {
               var size = feature.get('features').length;
               var style = styleCache[size];
               if (!style) {
                 style = new ol.style.Style({
-                  image: new ol.style.CircleStyle({
+                  image: new ol.style.Circle({
                     radius: 10,
                     stroke: new ol.style.Stroke({
                       color: '#fff'
@@ -256,7 +294,7 @@ class RealMap {
               return style;
             }
           });
-          this.layers.push({"cluster": clusters});
+          this.layers["cluster"] = clusters;
           this.map.render();
   }
 }
@@ -269,6 +307,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const map = new RealMap($("#map"));
   map.AddCluster();
 });
+
+function getTileURL(bounds)
+{
+    var res = this.map.getResolution();
+    var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+    var y = Math.round((bounds.bottom - this.maxExtent.bottom) / (res * this.tileSize.h));
+    var z = this.map.getZoom();
+
+    var path = "img/tiles/" + z + "/" + x + "/" + y + "." + this.type;
+    var url = this.url;
+    if (url instanceof Array)
+    {
+        url = this.selectUrl(path, url);
+    }
+    return url + path;
+}
 
 function createImputList(el) {
   Object.keys(LAYER_MAP).forEach((id) => {
