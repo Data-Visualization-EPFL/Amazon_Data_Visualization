@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#get-started").onclick = () => {
     $("body").classList.remove("overlay-on");
   };
-  createImputList($("#categories"));
+
+  let categories = Object.keys(constants.LAYER_MAP);
+  createImputList($("#categories"), categories);
   const map = new maps.RealMap($("#map"));
 });

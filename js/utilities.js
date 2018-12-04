@@ -24,12 +24,12 @@ function getTileURL(bounds)
     return url + path;
 }
 
-export function createImputList(el) {
-  Object.keys(constants.LAYER_MAP).forEach((id) => {
+export function createImputList(el, layers) {
+  layers.forEach((id) => {
     const container = document.createElement("div");
     const input = document.createElement("input");
     const label = document.createElement("label");
-    const text = document.createTextNode(constants.LAYER_MAP_NAME[id]);
+    const text = document.createTextNode(constants.LAYER_MAP[id].text);
 
     container.appendChild(input);
     container.appendChild(label);
@@ -37,6 +37,9 @@ export function createImputList(el) {
 
     input.setAttribute("id", id);
     input.setAttribute("class", "toggle");
+    if (constants.LAYER_MAP[id].check) {
+      input.checked = true;
+    }
     input.setAttribute("type", "checkbox");
     label.setAttribute("for", id);
 

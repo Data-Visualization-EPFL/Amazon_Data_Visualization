@@ -1,98 +1,144 @@
 import * as constants from './constants.js';
 import { $, $$ } from './utilities.js';
 
+// import Map from 'ol/Map.js';
+// import View from 'ol/View.js';
+// import GeoJSON from 'ol/format/GeoJSON.js';
+// import OSM from 'ol/source/OSM.js';
+// import VectorTileSource from 'ol/source/VectorTile.js';
+// import {Tile as TileLayer, VectorTile as VectorTileLayer} from 'ol/layer.js';
+// import Projection from 'ol/proj/Projection.js';
+
+
 export class RealMap {
   constructor(ctn) {
     this.map = null;
     this.layers = {};
     this.container = ctn;
     this.layers.base = new ol.layer.Tile({source: new ol.source.OSM()});
-    // var replacer = function(key, value) {
-    //   if (value.geometry) {
-    //     var type;
-    //     var rawType = value.type;
-    //     var geometry = value.geometry;
+
+    for (let layerId in constants.LAYER_MAP) {
+      this.addLayer(layerId, constants.LAYER_MAP);
+      if (!$("#" + layerId).checked) {
+        this.hideLayer(layerId);
+      }
+      $("#" + layerId).addEventListener("change", e => {
+        this.toggleLayer(layerId);
+      });
+    }
+    let categoryLayers;
+    for (let categoryId in constants.CATEGORIES) {
+      categoryLayers = constants.CATEGORIES[categoryId];
+      for (let layerId in categoryLayers) {
+        this.addLayer(layerId, categoryLayers);
+        if (!$("#" + categoryId).checked) {
+          this.hideLayer(layerId);
+        }
+        console.log(layerId);
+      }
+      $("#" + categoryId).addEventListener("change", e => {
+        for (let layerId in categoryLayers) {
+          this.toggleLayerOfCategory(layerId, categoryId);
+        }
+      });
+    }
+    this.renderMap();
+
+    // var url = constants.LAYER_MAP['agua'].url;
+    // fetch(url).then(function(response) {
+    //   return response.json();
+    // }).then(function(json) {
+    //   var tileIndex = geojsonvt(json, {
+    //     extent: 4096,
+    //     maxZoom: 15,
+    //     indexMaxZoom: 5,
+    //     debug: 1
+    //   });
+    //   console.log(tileIndex);
     //
-    //     if (rawType === 1) {
-    //       type = 'MultiPoint';
-    //       if (geometry.length == 1) {
-    //         type = 'Point';
-    //         geometry = geometry[0];
+    //   var replacer = function(key, value) {
+    //     if (value.geometry) {
+    //       var type;
+    //       var rawType = value.type;
+    //       var geometry = value.geometry;
+    //
+    //       if (rawType === 1) {
+    //         type = 'MultiPoint';
+    //         if (geometry.length == 1) {
+    //           type = 'Point';
+    //           geometry = geometry[0];
+    //         }
+    //       } else if (rawType === 2) {
+    //         type = 'MultiLineString';
+    //         if (geometry.length == 1) {
+    //           type = 'LineString';
+    //           geometry = geometry[0];
+    //         }
+    //       } else if (rawType === 3) {
+    //         type = 'Polygon';
+    //         if (geometry.length > 1) {
+    //           type = 'MultiPolygon';
+    //           geometry = [geometry];
+    //         }
     //       }
-    //     } else if (rawType === 2) {
-    //       type = 'MultiLineString';
-    //       if (geometry.length == 1) {
-    //         type = 'LineString';
-    //         geometry = geometry[0];
-    //       }
-    //     } else if (rawType === 3) {
-    //       type = 'Polygon';
-    //       if (geometry.length > 1) {
-    //         type = 'MultiPolygon';
-    //         geometry = [geometry];
-    //       }
+    //
+    //       return {
+    //         'type': 'Feature',
+    //         'geometry': {
+    //           'type': type,
+    //           'coordinates': geometry
+    //         },
+    //         'properties': value.tags
+    //       };
+    //     } else {
+    //       return value;
     //     }
+    //   };
     //
-    //     return {
-    //       'type': 'Feature',
-    //       'geometry': {
-    //         'type': type,
-    //         'coordinates': geometry
-    //       },
-    //       'properties': value.tags
-    //     };
-    //   } else {
-    //     return value;
-    //   }
-    // };
-
-    var url = constants.LAYER_MAP['agua'].url;
-    fetch(url).then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      var tileIndex = geojsonvt(json, {
-        extent: 4096,
-        maxZoom: 15,
-        indexMaxZoom: 5,
-        debug: 1
-      });
-      console.log(tileIndex);
-
-      // // request a particular tile
-      // var features = tileIndex.getTile(z, x, y).features;
-      // // show an array of tile coordinates created so far
-      // console.log("hello", features); // [{z: 0, x: 0, y: 0}, ...]
-
-      var vectorSource = new ol.source.VectorTile({
-        format: new ol.format.GeoJSON(),
-        tileLoadFunction: function(tile) {
-          var format = tile.getFormat();
-          var tileCoord = tile.getTileCoord();
-          console.log(tilesCoord);
-          var data = tileIndex.getTile(tileCoord[0], tileCoord[1], -tileCoord[2] - 1);
-          var features = format.readFeatures(JSON.stringify({
-              type: 'FeatureCollection',
-              features: data ? data.features : []
-            }), replacer);
-          tile.setLoader(function() {
-            tile.setFeatures(features);
-            tile.setProjection(tilePixels);
-          });
-        },
-        url: '' // arbitrary url, we don't use it in the tileLoadFunction
-      });
-      var vectorLayer = new ol.Layer.VectorTile({
-        source: vectorSource,
-        style: new ol.style.Style({
-          fill: new ol.style.Stroke({
-            color: 'rgba(20, 20, 240, 1)'
-          })
-        })
-      });
-      this.layers.tiles = vectorLayer;
-      console.log(vectorLayer);
-      this.renderMap();
-    });
+    //   var tilePixels = new ol.proj.Projection({
+    //     code: 'TILE_PIXELS',
+    //     units: 'tile-pixels'
+    //   });
+    //
+    //   var vectorSource = new ol.source.VectorTile({
+    //     format: new ol.format.GeoJSON(),
+    //     tileLoadFunction: function(tile) {
+    //       console.log("HELLO", tile);
+    //       var format = tile.getFormat();
+    //       var tileCoord = tile.getTileCoord();
+    //       console.log(tilesCoord);
+    //       var data = tileIndex.getTile(tileCoord[0], tileCoord[1], -tileCoord[2] - 1);
+    //       var features = format.readFeatures(JSON.stringify({
+    //           type: 'FeatureCollection',
+    //           features: data ? data.features : []
+    //         }), replacer);
+    //       tile.setLoader(function() {
+    //         tile.setFeatures(features);
+    //         tile.setProjection(tilePixels);
+    //       });
+    //     },
+    //     projection: 'EPSG:4326',
+    //     url: 'data' // arbitrary url, we don't use it in the tileLoadFunction
+    //   });
+    //   console.log(vectorSource);
+    //   var vectorLayer = new ol.Layer.VectorTile({
+    //     source: vectorSource,
+    //     // style: new ol.style.Style({
+    //     //   fill: new ol.style.Stroke({
+    //     //     color: 'rgba(20, 20, 240, 1)'
+    //     //   })
+    //     // })
+    //     preload: 0
+    //   });
+    //   console.log("HELLO");
+    //   console.log(vectorLayer);
+    //   this.layers.tiles = vectorLayer;
+    //
+    //   vectorLayer.getSource().on("tileloadstart", (e) => {
+    //     console.log(vectorLayer);
+    //   });
+    //   this.renderMap();
+    // });
 
 
     // var resolutions = [];
@@ -125,43 +171,31 @@ export class RealMap {
     // this.layers.tiles = tiles;
     // console.log(this.layers.base);
     // console.log(tiles);
-
     // this.addTilesLayer();
-    for (let layer in constants.LAYER_MAP) {
-      this.addLayer(layer);
-    }
-    this.renderMap();
 
-    for (let layer in constants.LAYER_MAP) {
-      if (!$("#" + layer).checked) {
-        this.hideLayer(layer);
-      }
-      $("#" + layer).addEventListener("change", e => {
-        this.toggleLayer(layer);
-      });
-    }
+
   }
 
-  addTilesLayer() {
-    var layer = new  ol.layer.Tile({
-          extent: [-13884991, 2870341, -7455066, 6338219],
-          source: new ol.source.TileWMS({
-            url: constants.TILES_URL.root,
-            params: {'LAYERS': 'topp:states', 'TILED': true},
-            serverType: 'geoserver',
-            // Countries have transparency, so do not fade tiles:
-            transition: 0
-          })
-        });
-        this.layers.tiles = layer;
-        return layer;
-  }
+  // addTilesLayer() {
+  //   var layer = new  ol.layer.Tile({
+  //         extent: [-13884991, 2870341, -7455066, 6338219],
+  //         source: new ol.source.TileWMS({
+  //           url: constants.TILES_URL.root,
+  //           params: {'LAYERS': 'topp:states', 'TILED': true},
+  //           serverType: 'geoserver',
+  //           // Countries have transparency, so do not fade tiles:
+  //           transition: 0
+  //         })
+  //       });
+  //       this.layers.tiles = layer;
+  //       return layer;
+  // }
 
-  addLayer(id) {
-    if (constants.LAYER_MAP[id].style == null) {
+  addLayer(id, category) {
+    if (category[id].style == null) {
       const vector = new ol.layer.Vector({
         source: new ol.source.Vector({
-          url: constants.LAYER_MAP[id].url,
+          url: category[id].url,
           format: new ol.format.GeoJSON({ layers: ['cantons'] }),
           overlaps: true
         })
@@ -170,12 +204,12 @@ export class RealMap {
     } else {
       const vector = new ol.layer.Vector({
         source: new ol.source.Vector({
-          url: constants.LAYER_MAP[id].url,
+          url: category[id].url,
           format: new ol.format.GeoJSON({ layers: ['cantons'] }),
           overlaps: true
         }),
         style: new ol.style.Style({
-          fill: new ol.style.Stroke(constants.LAYER_MAP[id].style)
+          fill: new ol.style.Stroke(category[id].style)
         })
       });
       this.layers[id] = vector;
@@ -185,6 +219,16 @@ export class RealMap {
   toggleLayer(id) {
     const layer = this.layers[id];
     if (!$("#" + id).checked) {
+      this.hideLayer(id);
+    } else {
+      this.showLayer(id);
+    }
+    this.map.render();
+  }
+
+  toggleLayerOfCategory(id, categoryId) {
+    const layer = this.layers[id];
+    if (!$("#" + categoryId).checked) {
       this.hideLayer(id);
     } else {
       this.showLayer(id);
@@ -206,8 +250,8 @@ export class RealMap {
       layers: Object.values(this.layers),
       target: this.container.id,
       view: new ol.View({
-        center: ol.proj.fromLonLat([-68.45, -12.92]),
-        zoom: 5
+        center: ol.proj.fromLonLat([-68.45, -11.62]),
+        zoom: 7
       }),
     });
   }
