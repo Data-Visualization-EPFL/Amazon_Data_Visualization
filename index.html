@@ -17,14 +17,15 @@
     <h1>Welcome!</h1>
     <h2>Context</h2>
     <p>
-      Visualisation context: amazon forest destruction, land use of area of interest (Bolivia, Peru, Brazil)...
+      The Amazonie is the largest and most biodiverse tract of tropical rainforest in the world.
+      It has a primary role in world ecosystem by participating in the regulation of CO2 concentration in the atmosphere and by being home for a very large number of vegetal and animal species.
+      But as you will see, the fragil natural environment is subjec to destruction, a major part of that is due to the land use strategy of the three country sharing this area: Bolivia, Peru, Brazil.
     </p>
     <h2> How to use this Visualisation </h2>
     <p>
-      This presentation is composed of 3 different parts:
-      - Map of the AOI with some land use data.
+      This presentation is composed of 3 different parts: <br/>
+      - A Map of the area of interest with some land use data such as the agriculture, the water present...<br/>
       - Data insight where you will be able to see the different ratio of forest destroy for each time reference.
-      - A range slider that you can manipulate in order to change the time reference and see the evolution of the land use and forest detruction years after years
     </p>
     <button id="get-started" class="btn btn-primary">Get started</button>
   </div>
@@ -47,10 +48,10 @@
     <footer>
       <div id="footer-links">
         <a href="https://naturalcapitalproject.stanford.edu/">
-          <img src="css/ico/github.png"/ class="ico">
+          <img src="css/ico/github.png" class="ico">
         </a>
         <a href="https://github.com/Data-Visualization-EPFL/Amazon_Data_Visualization">
-          <img src="css/ico/natural-capital-project.png"/ class="ico">
+          <img src="css/ico/natural-capital-project.png" class="ico">
         </a>
       </div>
       <p id="copyright">&copy; Pierre Assemat, Tim Nguyen, Ouiame Talbi</p>
@@ -58,6 +59,9 @@
 </body>
 <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
 <script type="module" src="js/main.js"></script>
-<script src="lib/d3.min.js"></script>
+<script src="js/constants.js"></script>
+<script src="js/map.js"></script>
+<script src="js/utilities.js"></script>
+<script src="lib/d3.js"></script>
 
 </html>

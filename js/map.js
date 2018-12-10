@@ -1,7 +1,6 @@
 import * as constants from './constants.js';
 import { $, $$ } from './utilities.js';
 
-
 export class RealMap {
   constructor(ctn) {
     this.map = null;
@@ -36,7 +35,7 @@ export class RealMap {
     }
     this.renderMap();
   }
-  
+
   addLayer(id, category) {
     if (category[id].style == null) {
       const vector = new ol.layer.Vector({

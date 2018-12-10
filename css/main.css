@@ -97,7 +97,7 @@ header h1 {
 }
 
 #legend {
-  min-width: 400px;
+  min-width: 30%;
   background-color: rgba(0,0,0,0.6);
   padding: 1em;
   overflow: auto;

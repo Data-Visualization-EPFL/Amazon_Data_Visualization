@@ -8,7 +8,7 @@ export const CATEGORIES = {
     'agricultura': {
       'url': 'data/land-use/agricultura.geojson',
       'style': {
-          color: 'rgba(80, 30, 30, 1)'//'rgba(180, 180, 30, 1)'
+          color: 'rgba(80, 30, 30, 1)' //'rgba(180, 180, 30, 1)'
         }
     },
     'pasto': {
@@ -20,19 +20,19 @@ export const CATEGORIES = {
     'pasto-agricultura': {
       'url': 'data/land-use/pasto_agricultura.geojson',
       'style': {
-          color: 'rgba(80, 30, 30, 1)'//'rgba(150, 200, 50, 1)'
+          color: 'rgba(80, 30, 30, 1)' //'rgba(150, 200, 50, 1)'
         }
     },
     'pasto-herbazal': {
       'url': 'data/land-use/pasto_herbazal.geojson',
       'style': {
-          color: 'rgba(80, 130, 130, 1)'
+          color: 'rgba(80, 30, 30, 1)' //'rgba(80, 130, 130, 1)'
         }
     },
     'vegetacion': {
       'url': 'data/land-use/vegetacion.geojson',
       'style': {
-          color: 'rgba(80, 30, 30, 1)'//'rgba(5, 90, 5, 1)'
+          color: 'rgba(80, 30, 30, 1)' //'rgba(5, 90, 5, 1)'
         }
     },
   },

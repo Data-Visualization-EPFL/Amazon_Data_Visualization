@@ -2,3 +2,4 @@
 data_private/*
 data/land-use.geojson
 python/*
+*__pycache__*
