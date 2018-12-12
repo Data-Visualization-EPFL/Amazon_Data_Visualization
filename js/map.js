@@ -14,9 +14,7 @@ export class RealMap {
 
     for (let layerId in constants.LAYER_MAP) {
       this.addLayer(layerId, constants.LAYER_MAP);
-      if (!$("#" + layerId).checked) {
-        this.hideLayer(layerId);
-      }
+      this.hideLayer(layerId);
       $("#" + layerId).addEventListener("change", e => {
         this.toggleLayer(layerId);
       });
@@ -27,9 +25,7 @@ export class RealMap {
       categoryLayers = constants.CATEGORIES[categoryId];
       for (let layerId in categoryLayers) {
         this.addLayer(layerId, categoryLayers);
-        if (!$("#" + categoryId).checked) {
-          this.hideLayer(layerId);
-        }
+        this.hideLayer(layerId);
       }
       $("#" + categoryId).addEventListener("change", e => {
         for (let layerId in categoryLayers) {
@@ -133,6 +129,22 @@ export class RealMap {
       case "mines":
         this.showLayer("AOI-percountry");
         this.showLayer("mineria");
+        break;
+
+      case "mapItems":
+        for (let layerId in constants.LAYER_MAP) {
+          if (!$("#" + layerId).checked) {
+            this.hideLayer(layerId);
+          } else {
+            this.showLayer(layerId);
+          }
+        }
+        for (let categoryId in constants.CATEGORIES) {
+          const categoryLayers = constants.CATEGORIES[categoryId];
+          for (let layerId in categoryLayers) {
+            this.toggleLayerOfCategory(layerId, categoryId);
+          }
+        }
         break;
     }
   }
