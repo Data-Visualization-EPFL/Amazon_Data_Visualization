@@ -101,20 +101,20 @@ export class RealMap {
   }
 
   switchLayers(id) {
-      const categoryLayers = constants.CATEGORIES["agricultura"];
-      // Hide layers
-      this.hideLayer("AOI-percountry");
+    const categoryLayers = constants.CATEGORIES["agricultura"];
+    // Hide layers
+    this.hideLayer("AOI-percountry");
+    for (let layerId in categoryLayers) {
+      this.hideLayer(layerId);
+    }
+    if (id === "AOI") {
+      this.showLayer("AOI-percountry");
+    } else if (id === "agriculture") {
+      this.showLayer("AOI-percountry");
       for (let layerId in categoryLayers) {
-          this.hideLayer(layerId);
+          this.showLayer(layerId);
       }
-      if (id === "AOI") {
-          this.showLayer("AOI-percountry");
-      } else if (id === "agriculture") {
-          this.showLayer("AOI-percountry");
-          for (let layerId in categoryLayers) {
-              this.showLayer(layerId);
-          }
-      }
+    }
   }
 
   renderMap() {

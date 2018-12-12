@@ -60,15 +60,18 @@ body {
 
 .overlay-on .overlay {
   display: block;
-  font-size: 1.5em;
 }
 
 #presentation-overlay h1 {
   text-align: center;
 }
 
-#presentation-overlay p {
+#presentation-overlay {
   font-size: 1.2em;
+}
+
+#presentation-overlay > ul {
+  padding-left: 1em;
 }
 
 #presentation-overlay button {
@@ -107,6 +110,13 @@ header h1 {
   max-width: 35%;
   padding: 0 1.1em 1em;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#legend .tabcontent {
+  overflow: auto;
+  flex-grow: 1;
 }
 
 #slider-container {
@@ -219,6 +229,8 @@ h2 {
     justify-content: flex-start;
     background-color: rgba(0,0,0,0.3);
     width: auto;
+    position: sticky;
+    top: 0;
 }
 
 .tablinks {
@@ -232,16 +244,12 @@ h2 {
 
 .tabcontent {
   background-color: rgba(0,0,0,0.6);
-  padding: 1em;
+  padding: 1em 1.5em;
   font-size: 1.5em;
-}
-.tabcontent p, h2 {
-    margin: inherit;
-    padding: 0.5em;
 }
 
 .tabcontent p {
-    font-size: 1.6em;
+  font-size: 1.6em;
 }
 
 .tab-active {
