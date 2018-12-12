@@ -102,7 +102,19 @@ export class RealMap {
   }
 
   showLayer(id) {
-    this.layers[id].setVisible(true);
+    const layer = this.layers[id];
+    // if (layer.getSource().getState() != "ready") {
+      this.container.classList.add("loading");
+    // }
+    layer.getSource().once("change", (e) => {
+      if (layer.getSource().getState() == "ready") {
+        this.container.classList.remove("loading");
+      }
+    });
+
+    setTimeout(() => this.container.classList.remove("loading"), 1000)
+
+    layer.setVisible(true);
   }
 
   hideLayer(id) {

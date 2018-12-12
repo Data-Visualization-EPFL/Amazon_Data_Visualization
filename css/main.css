@@ -102,6 +102,24 @@ header h1 {
 
 #map {
   background: white;
+  position: relative;
+}
+
+#map::before {
+  position: absolute;
+  content: "Loading...";
+  z-index: 999;
+  background-color: rgba(0,0,0,0.4);
+  padding: 1em;
+  font-size: 1.25em;
+  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#map:not(.loading)::before {
+  display: none;
 }
 
 #legend {
