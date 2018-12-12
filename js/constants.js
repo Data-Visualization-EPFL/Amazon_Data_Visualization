@@ -36,6 +36,22 @@ export const CATEGORIES = {
         }
     },
   },
+  'agua': {
+    'agua': {
+      'url': 'data/land-use/agua.geojson',
+      'style': {
+        color: 'rgba(5, 5, 120, 1)'//'rgba(20, 20, 240, 1)'
+      },
+      'text': 'Agua',
+    },
+    'aguajales': {
+      'url': 'data/land-use/aguajales.geojson',
+      'style': {
+        color: 'rgba(5, 5, 120, 1)'
+      },
+      'text': 'Aguajales',
+    },
+  }
 }
 
 export const LAYER_MAP = {
@@ -65,39 +81,28 @@ export const LAYER_MAP = {
     'text': 'Corrientes',
   },
   'agua': {
-    'url': 'data/land-use/agua.geojson',
-    'style': {
-        color: 'rgba(5, 5, 120, 1)'//'rgba(20, 20, 240, 1)'
-      },
-      'text': 'Agua',
-  },
-  'aguajales': {
-    'url': 'data/land-use/aguajales.geojson',
-    'style': {
-        color: 'rgba(5, 5, 120, 1)'
-      },
-      'text': 'Aguajales',
+    'text': 'Agua',
   },
   'bosque-inundable': {
     'url': 'data/land-use/bosque_inundable.geojson',
     'style': {
-        color: 'rgba(40, 130, 190, 1)'
-      },
-      'text': 'Bosque inundable',
+      color: 'rgba(40, 130, 190, 1)'
+    },
+    'text': 'Bosque inundable',
   },
   'urbano': {
     'url': 'data/land-use/urbano.geojson',
     'style': {
-        color: 'rgba(120, 120, 130, 1)'
-      },
-      'text': 'Urbano',
+      color: 'rgba(120, 120, 130, 1)'
+    },
+    'text': 'Urbano',
   },
   'mineria': {
     'url': 'data/land-use/mineria.geojson',
     'style': {
-        color: 'rgba(0, 0, 0, 1)'
-      },
-      'text': 'Mineria',
+      color: 'rgba(0, 0, 0, 1)'
+    },
+    'text': 'Mineria',
   },
   // 'airport': {
     //   'url': 'data/airport.geojson',

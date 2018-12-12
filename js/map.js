@@ -21,6 +21,7 @@ export class RealMap {
         this.toggleLayer(layerId);
       });
     }
+
     let categoryLayers;
     for (let categoryId in constants.CATEGORIES) {
       categoryLayers = constants.CATEGORIES[categoryId];
@@ -37,9 +38,9 @@ export class RealMap {
       });
     }
     var tilesLayer = new ol.layer.Tile({
-        source: new ol.source.XYZ({
-                url: constants.LAYER_MAP["carbon-stock"].url
-        })
+      source: new ol.source.XYZ({
+        url: constants.LAYER_MAP["carbon-stock"].url
+      })
     });
 
     this.layers["carbon-stock"] = tilesLayer;
@@ -101,24 +102,42 @@ export class RealMap {
   }
 
   switchLayers(id) {
-    const categoryLayers = constants.CATEGORIES["agricultura"];
     // Hide layers
     this.hideLayer("AOI-percountry");
-    for (let layerId in categoryLayers) {
-      this.hideLayer(layerId);
-    }
-    if (id === "AOI") {
-      this.showLayer("AOI-percountry");
-    } else if (id === "agriculture") {
-      this.showLayer("AOI-percountry");
-      for (let layerId in categoryLayers) {
-          this.showLayer(layerId);
+    for (let category in constants.CATEGORIES) {
+      for (let layerId in constants.CATEGORIES[category]) {
+        this.hideLayer(layerId);
       }
+    }
+    this.hideLayer("agua");
+    this.hideLayer("mineria");
+    switch (id) {
+      case "AOI":
+        this.showLayer("AOI-percountry");
+        break;
+
+      case "agriculture":
+        this.showLayer("AOI-percountry");
+        for (let layerId in constants.CATEGORIES["agricultura"]) {
+          this.showLayer(layerId);
+        }
+        break;
+
+      case "water":
+        this.showLayer("AOI-percountry");
+        for (let layerId in constants.CATEGORIES["agua"]) {
+          this.showLayer(layerId);
+        }
+        break;
+
+      case "mines":
+        this.showLayer("AOI-percountry");
+        this.showLayer("mineria");
+        break;
     }
   }
 
   renderMap() {
-    console.log(this.layers);
     this.map = new ol.Map({
       layers: Object.values(this.layers),
       target: this.container.id,
