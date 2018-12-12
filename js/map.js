@@ -1,5 +1,5 @@
 import * as constants from './constants.js';
-import { $, $$ } from './utilities.js';
+import { $ } from './utilities.js';
 
 export class RealMap {
   constructor(ctn) {
@@ -7,6 +7,10 @@ export class RealMap {
     this.layers = {};
     this.container = ctn;
     this.layers.base = new ol.layer.Tile({source: new ol.source.OSM()});
+    // this.mapBounds = new ol.Bounds( -72.611555238, -14.5522269577, -65.3395954718, -8.361227684);
+    // this.mapMinZoom = 7;
+    // this.mapMaxZoom = 10;
+    // this.emptyTileURL = "http://www.maptiler.org/img/none.png";
 
     for (let layerId in constants.LAYER_MAP) {
       this.addLayer(layerId, constants.LAYER_MAP);
@@ -25,7 +29,6 @@ export class RealMap {
         if (!$("#" + categoryId).checked) {
           this.hideLayer(layerId);
         }
-        console.log(layerId);
       }
       $("#" + categoryId).addEventListener("change", e => {
         for (let layerId in categoryLayers) {
@@ -33,6 +36,14 @@ export class RealMap {
         }
       });
     }
+    var tilesLayer = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+                url: constants.LAYER_MAP["carbon-stock"].url
+        })
+    });
+
+    this.layers["carbon-stock"] = tilesLayer;
+
     this.renderMap();
   }
 
@@ -87,6 +98,23 @@ export class RealMap {
 
   hideLayer(id) {
     this.layers[id].setVisible(false);
+  }
+
+  switchLayers(id) {
+      const categoryLayers = constants.CATEGORIES["agricultura"];
+      // Hide layers
+      this.hideLayer("AOI-percountry");
+      for (let layerId in categoryLayers) {
+          this.hideLayer(layerId);
+      }
+      if (id === "AOI") {
+          this.showLayer("AOI-percountry");
+      } else if (id === "agriculture") {
+          this.showLayer("AOI-percountry");
+          for (let layerId in categoryLayers) {
+              this.showLayer(layerId);
+          }
+      }
   }
 
   renderMap() {

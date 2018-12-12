@@ -45,7 +45,15 @@ export const LAYER_MAP = {
       color: 'rgba(80, 130, 80, 1)'
     },
     'text': 'AOI per country',
-    'check': true,
+    'check': false,
+  },
+  'carbon-stock': {
+    'url': 'data/modeled_carbon_stocks_4326_tiles/{z}/{x}/{y}.png',
+    'style': {
+      color: 'rgba(80, 130, 80, 1)'
+    },
+    'text': 'Carbon Stocks',
+    'check': false,
   },
   'agricultura': {
     'text': 'Agricultura',

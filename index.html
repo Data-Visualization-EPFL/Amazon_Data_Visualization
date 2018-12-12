@@ -23,9 +23,14 @@
     </p>
     <h2> How to use this Visualisation </h2>
     <p>
-      This presentation is composed of 3 different parts: <br/>
-      - A Map of the area of interest with some land use data such as the agriculture, the water present...<br/>
-      - Data insight where you will be able to see the different ratio of forest destroy for each time reference.
+      This presentation is composed of 2 different parts: <br/>
+      - A Map<br/>
+      - An information card composed of 5 tabs: </br>
+        -> Map Items: Where you will be able to display the several data </br>
+        -> AOI: The area of interest with some extra information </br>
+        -> Agriculture: Emphasasing the agriculture activity consequences on the area </br>
+        -> Water: Showing the water presence and rivers in the area </br>
+        -> Mines: Understanding the forest destruction meant to mines exploitation
     </p>
     <button id="get-started" class="btn btn-primary">Get started</button>
   </div>
@@ -37,14 +42,69 @@
     </header>
     <div id="map-container" class="flex grow">
       <div id="legend">
-        <h2>Map items</h2>
-        <div id="categories"></div>
+        <div class="tab">
+          <button class="tablinks" id="AOI-tab">AOI</button>
+          <button class="tablinks" id="agriculture-tab">Agriculture</button>
+          <button class="tablinks" id="water-tab">Water</button>
+          <button class="tablinks" id="mines-tab">Mines</button>
+          <button class="tablinks" id="mapItems-tab">Map Items</button>
+        </div>
+        <div id="mapItems-content" class="tabcontent">
+            <div id="categories"></div>
+        </div>
+        <div id="AOI-content" class="tabcontent">
+            <h2>Area of Interest</h2>
+            <p>
+                The Amazonian forest covers 7 million km2, of which 5,5 million km2 are covered by the rainforest.</br>
+                It represents more than half of the world's remaining tropical forests and includes the largest and most diverse tropical rainforest in the world,
+                with about 390 billion individual trees divided into 16,000 species. This region includes a territory belonging to nine nations.</br>
+                Most of the forest is confined to Brazil (60%), Peru (13%), Colombia (10%) and, to a lesser extent, Venezuela, Ecuador, Bolivia, Guyana,
+                Suriname and in French Guiana.</br></br>
+                In order to preserve this ecosystem, several parts of the Amazon rainforest are protected and 3 of them: the central Amazon conservation complex in Brazil,
+                the Manú national park in Peru and the Noel Kempff Mercado national park in Bolivia, are inscribed on the World Heritage List by the United Nations Educational,
+                Scientific and Cultural Organization (UNESCO).</br>
+                We are interested here in these three parts.
+            </p>
+        </div>
+        <div id="agriculture-content" class="tabcontent">
+            <h2>Agriculture</h2>
+            <p>
+                Since 1970, about 18% of the original forest has disappeared due to converting wooded areas into agricultural fields.
+                Besides the deforestation, the agriculture in mountainous, watershed areas has adverse effects on the environment,
+                notably the alteration of water cycles and erosion.</br>
+                In Peru, the cultivation of coca plants (containing the basic ingredient for cocaine) was so widespread during the 1980s and 1990s
+                that Peruvian river flood cycles were altered in some areas, making the high-water season unpredictable.</br>
+                The quantity of chemicals, stemming from the cultivation of coca, in the water was very high and caused the death of several species.
+            </p>
+        </div>
+        <div id="water-content" class="tabcontent">
+            <h2>Water repartition</h2>
+            <p>
+                Rivers cross almost all the area which is very rich in soft water. </br>
+                </br>
+                Floodplain forests represent between 3-4% of the Amazon Basin area and are highly productive riverside areas that are flooded during the rainy season,
+                and which receive rich sediment from the Andes Mountains. </br>
+                But the large quantity of water make the mobility in the area very complicated and it is almost impossible to develop agriculture field in this area.
+            </p>
+        </div>
+        <div id="mines-content" class="tabcontent">
+            <h2>Mining activities</h2>
+            <p>
+                While Amazon mining may not cause deforestation on the same scale as agriculture, it has a wide range of effects that can affect the environment in
+                the vicinity of the mining site and downstream from extractive operations.</br>
+                Mining pollutes water with run-off from the mine, and threaten local communities.
+                A notorious pollutant used in gold extraction is mercury.</br>
+                For example, 90% of fish caught by rural villagers south of gold mining areas of the Tapajós River in Brazil were found to be contaminated with methylmercury,
+                which is dangerous for the nervous system as well as foetuses, affecting also local populations.</br>
+                Mercury also ends up in the atmosphere, from where it returns to forests.
+            </p>
+        </div>
       </div>
       <div id="map" class="grow"></div>
     </div>
-    <div id="slider-container">
+    <!-- <div id="slider-container">
       <input id="distance" type="range" step="10" min="1" max="100" value="40" class="slider">
-    </div>
+    </div> -->
     <footer>
       <div id="footer-links">
         <a href="https://naturalcapitalproject.stanford.edu/">
@@ -62,6 +122,6 @@
 <script type="module" src="js/constants.js"></script>
 <script type="module" src="js/map.js"></script>
 <script type="module" src="js/utilities.js"></script>
-<script src="lib/d3.js"></script>
+<script src="lib/d3.min.js"></script>
 
 </html>

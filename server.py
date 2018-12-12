@@ -22,6 +22,7 @@ class Server(BaseHTTPRequestHandler):
         request_extension = split_path[1]
         types = ["", ".html", ".css", ".js"]
         staticTypes = [".png", ".jpg", ".jpeg", ".json", ".geojson"]
+        print(self.path)
         if request_extension in types:
             if self.path in routes:
                 handler = BaseHandler(request_extension)
@@ -34,6 +35,7 @@ class Server(BaseHTTPRequestHandler):
                 handler.find(routes[self.path])
         else:
             handler = BadRequestHandler()
+        print(handler)
         self.respond({
             'handler': handler
         })

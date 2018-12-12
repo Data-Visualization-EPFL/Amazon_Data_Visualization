@@ -36,7 +36,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 800px;
+  max-width: 1000px;
   border-radius: 4px;
   padding: 1em 2em;
   background-color: rgba(255,255,255,0.95);
@@ -60,10 +60,15 @@ body {
 
 .overlay-on .overlay {
   display: block;
+  font-size: 1.5em;
 }
 
 #presentation-overlay h1 {
   text-align: center;
+}
+
+#presentation-overlay p {
+  font-size: 1.2em;
 }
 
 #presentation-overlay button {
@@ -97,9 +102,10 @@ header h1 {
 }
 
 #legend {
-  min-width: 30%;
-  background-color: rgba(0,0,0,0.6);
-  padding: 1em;
+  background-color: rgba(0,0,0,0.3);
+  min-width: 35%;
+  max-width: 35%;
+  padding: 0 1.1em 1em;
   overflow: auto;
 }
 
@@ -206,6 +212,44 @@ h2 {
 
 .btn-error:hover:active {
   background: #a4000f;
+}
+
+.tab {
+    display: inline-flex;
+    justify-content: flex-start;
+    background-color: rgba(0,0,0,0.3);
+    width: auto;
+}
+
+.tablinks {
+  border: none;
+  font-size: 2em;
+  color: #ebebeb;
+  background-color: transparent;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.tabcontent {
+  background-color: rgba(0,0,0,0.6);
+  padding: 1em;
+  font-size: 1.5em;
+}
+.tabcontent p, h2 {
+    margin: inherit;
+    padding: 0.5em;
+}
+
+.tabcontent p {
+    font-size: 1.6em;
+}
+
+.tab-active {
+    background-color: rgba(0,0,0,0.6);
+}
+
+#categories label {
+    font-size: 1.4em;
 }
 
 /* Toggles */

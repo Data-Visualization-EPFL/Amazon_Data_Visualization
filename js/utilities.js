@@ -4,7 +4,7 @@ export function $(sel) {
   return document.querySelector(sel);
 }
 
-export function $$(sel) {
+export function $all(sel) {
   return document.querySelectorAll(sel);
 }
 
@@ -45,4 +45,13 @@ export function createImputList(el, layers) {
 
     el.appendChild(container);
   });
+}
+
+export function changeTab(event) {
+    $all(".tabcontent").forEach(el => {
+         el.style.display = "none";
+         $("#" + el.id.split('-')[0] + "-tab").classList.remove("tab-active");
+    });
+    $("#" + event.target.id.split('-')[0] + "-content").style.display = "block";
+    event.target.classList.add("tab-active");
 }
