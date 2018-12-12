@@ -45,11 +45,12 @@ export class RealMap {
   }
 
   addLayer(id, category) {
-    if (category[id].style == null) {
+    const format = category[id].format || "GeoJSON";
+    if (!category[id].style) {
       const vector = new ol.layer.Vector({
         source: new ol.source.Vector({
           url: category[id].url,
-          format: new ol.format.GeoJSON({ layers: ['cantons'] }),
+          format: new ol.format[format](),
           overlaps: true
         })
       });
@@ -58,12 +59,23 @@ export class RealMap {
       const vector = new ol.layer.Vector({
         source: new ol.source.Vector({
           url: category[id].url,
-          format: new ol.format.GeoJSON({ layers: ['cantons'] }),
+          format: new ol.format[format](),
           overlaps: true
         }),
-        style: new ol.style.Style({
-          fill: new ol.style.Stroke(category[id].style)
-        })
+        style: (feature, resolution) => {
+          let styles = [
+            new ol.style.Style({
+              fill: new ol.style.Stroke(category[id].style)
+            }),
+          ];
+
+          if (category[id].style.text) {
+            styles.push(new ol.style.Style({
+              text: new ol.style.Text(category[id].style.text(feature, resolution))
+            }))
+          }
+          return styles;
+        }
       });
       this.layers[id] = vector;
     }

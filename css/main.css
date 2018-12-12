@@ -253,11 +253,13 @@ h2 {
 }
 
 .tab-active {
-    background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.6);
+  color: #12bc00;
+  box-shadow: 0 2px #12bc00 inset;
 }
 
 #categories label {
-    font-size: 1.4em;
+  font-size: 1.4em;
 }
 
 /* Toggles */

@@ -6,7 +6,8 @@ export const TILES_URL = {
 export const CATEGORIES = {
   'agricultura': {
     'agricultura': {
-      'url': 'data/land-use/agricultura.geojson',
+      'url': 'data/land-use/agricultura.topojson',
+      'format': 'TopoJSON',
       'style': {
           color: 'rgba(80, 30, 30, 1)' //'rgba(180, 180, 30, 1)'
         }
@@ -38,7 +39,8 @@ export const CATEGORIES = {
   },
   'agua': {
     'agua': {
-      'url': 'data/land-use/agua.geojson',
+      'url': 'data/land-use/agua.topojson',
+      'format': 'TopoJSON',
       'style': {
         color: 'rgba(5, 5, 120, 1)'//'rgba(20, 20, 240, 1)'
       },
@@ -58,7 +60,14 @@ export const LAYER_MAP = {
   'AOI-percountry': {
     'url': 'data/AOI_percountry.geojson',
     'style': {
-      color: 'rgba(80, 130, 80, 1)'
+      color: 'rgba(80, 130, 80, 1)',
+      text: (feature, resolution) => {
+        return {
+          text: resolution < 100000 ? feature.get('SOVEREIGNT') : '' ,
+          fill: new ol.style.Fill({ color: "#000000" }),
+          stroke: new ol.style.Stroke({ color: "#FFFFFF", width: 2 }),
+        };
+      },
     },
     'text': 'AOI per country',
     'check': false,
