@@ -42,7 +42,7 @@ export const CATEGORIES = {
       'url': 'data/land-use/agua.topojson',
       'format': 'TopoJSON',
       'style': {
-        color: 'rgba(5, 5, 120, 1)'//'rgba(20, 20, 240, 1)'
+        color: 'rgba(5, 5, 120, 1)' // 'rgba(20, 20, 240, 1)'
       },
       'text': 'Agua',
     },
@@ -53,6 +53,13 @@ export const CATEGORIES = {
       },
       'text': 'Aguajales',
     },
+    'bosque-inundable': {
+      'url': 'data/land-use/bosque_inundable.geojson',
+      'style': {
+        color: 'rgba(5, 5, 120, 1)' // 'rgba(40, 130, 190, 1)'
+      },
+      'text': 'Bosque inundable',
+    }
   }
 }
 
