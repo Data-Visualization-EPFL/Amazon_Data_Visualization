@@ -60,6 +60,29 @@ export const CATEGORIES = {
       },
       'text': 'Bosque inundable',
     }
+  },
+  'mineria': {
+    'mineria': {
+      'url': 'data/land-use/mineria.geojson',
+      'style': {
+        color: 'rgba(0, 0, 0, 1)'
+      },
+      'text': 'Mines',
+    },
+    '80s': {
+      'url': 'data/mines/80s.geojson',
+      'style': {
+        color: 'rgba(0, 0, 0, 1)'
+      },
+      'text': 'Mines 80s',
+    },
+    '90s': {
+      'url': 'data/mines/90s.geojson',
+      'style': {
+        color: 'rgba(0, 0, 0, 1)'
+      },
+      'text': 'Mines 90s',
+    }
   }
 }
 
@@ -79,22 +102,9 @@ export const LAYER_MAP = {
     'text': 'AOI per country',
     'check': false,
   },
-  'carbon-stock': {
-    'url': 'data/modeled_carbon_stocks_4326_tiles/{z}/{x}/{y}.png',
-    'style': {
-      color: 'rgba(80, 130, 80, 1)'
-    },
-    'text': 'Carbon Stocks',
-    'check': false,
-  },
   'agricultura': {
     'text': 'Agricultura',
     'style': null,
-  },
-  'corrientes': {
-    'url': 'data/corrientes.geojson',
-    'style': null,
-    'text': 'Corrientes',
   },
   'agua': {
     'text': 'Agua',
@@ -118,8 +128,35 @@ export const LAYER_MAP = {
     'style': {
       color: 'rgba(0, 0, 0, 1)'
     },
-    'text': 'Mineria',
+    'text': 'Mines',
   },
+  'mines_80s': {
+    'url': 'data/mines/80s.geojson',
+    'style': {
+      color: 'rgba(0, 0, 0, 1)'
+    },
+    'text': 'Mines 80s',
+  },
+  'mines_90s': {
+    'url': 'data/mines/90s.geojson',
+    'style': {
+      color: 'rgba(0, 0, 0, 1)'
+    },
+    'text': 'Mines 90s',
+  }
+  // 'corrientes': {
+  //   'url': 'data/corrientes.geojson',
+  //   'style': null,
+  //   'text': 'Corrientes',
+  // },
+  // 'carbon-stock': {
+  //   'url': 'data/modeled_carbon_stocks_4326_tiles/{z}/{x}/{y}.png',
+  //   'style': {
+  //     color: 'rgba(80, 130, 80, 1)'
+  //   },
+  //   'text': 'Carbon Stocks',
+  //   'check': false,
+  // },
   // 'airport': {
     //   'url': 'data/airport.geojson',
     //   'style': null

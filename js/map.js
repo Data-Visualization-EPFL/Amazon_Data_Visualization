@@ -33,13 +33,13 @@ export class RealMap {
         }
       });
     }
-    var tilesLayer = new ol.layer.Tile({
-      source: new ol.source.XYZ({
-        url: constants.LAYER_MAP["carbon-stock"].url
-      })
-    });
-
-    this.layers["carbon-stock"] = tilesLayer;
+    // var tilesLayer = new ol.layer.Tile({
+    //   source: new ol.source.XYZ({
+    //     url: constants.LAYER_MAP["carbon-stock"].url
+    //   })
+    // });
+    //
+    // this.layers["carbon-stock"] = tilesLayer;
 
     this.renderMap();
   }
@@ -152,7 +152,9 @@ export class RealMap {
 
       case "mines":
         this.showLayer("AOI-percountry");
-        this.showLayer("mineria");
+        for (let layerId in constants.CATEGORIES["mineria"]) {
+          this.showLayer(layerId);
+        }
         break;
 
       case "mapItems":
