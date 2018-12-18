@@ -24,9 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
       el.classList.add("tab-active");
     }
   });
-  $all(".tabcontent").forEach(el => {
-    if (el.id.split("-")[0] !== id) {
-      el.style.display = "none";
+  // Select first tab
+  $("#AOI-tab").click();
+
+  // Init slider
+  $("#mines-slider").addEventListener("change", function() {
+    let allYears = [2010, 2000, 1990, 1980];
+    for (const year of allYears) {
+      map.showLayer("mines_" + year + "s");
     }
-  });
+    allYears = allYears.filter(x => x > this.value);
+    for (const year of allYears) {
+      map.hideLayer("mines_" + year + "s");
+    }
+  });;
 });
