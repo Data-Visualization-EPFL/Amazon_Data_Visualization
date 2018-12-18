@@ -304,6 +304,10 @@ h2 {
 }
 
 /* Sliders */
+#slider-mines-time {
+  width: 30%;
+}
+
 .slider {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -311,7 +315,7 @@ h2 {
   height: 10px;
   margin: 0;
   --notch-size: 3px;
-  --num-steps: 10;
+  --num-steps: 0;
   /* Draw a vertical line to get one notch per background-image instance */
   background-image: linear-gradient(90deg, rgba(255,255,255,0.5) var(--notch-size),
    transparent 0);
@@ -320,9 +324,11 @@ h2 {
   /* Repeat the background-image horizontally */
   background-repeat: repeat-x;
   /* Size the background to get nine visible notch instances. */
-  background-size: calc(calc(100% / var(--num-steps)) - var(--notch-size) / 2) 10px;
+  /* background-size: calc(calc(100% / var(--num-steps)) - var(--notch-size) / 2) 10px; */
+  background-size: 95% 10px;
   background-color: black;
   outline: none;
+  cursor: pointer;
 }
 
 .slider::-webkit-slider-thumb {

@@ -25,16 +25,21 @@
     <p>
       This presentation is composed of 2 different parts: <br/>
       <ul>
-        <li>A Map</li>
+        <li>A Map where you will see the different data evolves</li>
         <li>An information card composed of 5 tabs:</li>
         <ul>
-          <li>Map Items: Where you will be able to display the several data</li>
           <li>AOI: The area of interest with some extra information</li>
           <li>Agriculture: Emphasasing the agriculture activity consequences on the area</li>
           <li>Water: Showing the water presence and rivers in the area</li>
           <li>Mines: Understanding the forest destruction meant to mines exploitation</li>
+          <li>Map Items: Where you will be able to display the several data</li>
         </ul>
       </ul>
+      </br>
+      By moving from one tab to another, the map adapts itself to display the interesting data
+      related to the current tab category. The last tab: Map Items is a dashboard that allow you
+      to independantly select the data and display them through a checkbox. Thanks to that, you can
+      easilly overlaps several layers on the map in order to make your own conclusion.
     </p>
     <button id="get-started" class="btn btn-primary">Get started</button>
   </div>
@@ -102,6 +107,9 @@
                 which is dangerous for the nervous system as well as foetuses, affecting also local populations.</br>
                 Mercury also ends up in the atmosphere, from where it returns to forests.
             </p>
+            <div id="slider-mines-time">
+              <input id="years" type="range" step="10" min="1980" max="1990" value="1980" class="slider">
+            </div>
         </div>
       </div>
       <div id="map" class="grow"></div>

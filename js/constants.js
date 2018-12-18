@@ -95,7 +95,7 @@ export const LAYER_MAP = {
         return {
           text: resolution < 100000 ? feature.get('SOVEREIGNT') : '' ,
           fill: new ol.style.Fill({ color: "#000000" }),
-          stroke: new ol.style.Stroke({ color: "#FFFFFF", width: 2 }),
+          // stroke: new ol.style.Stroke({ color: "#FFFFFF", width: 2 }),
         };
       },
     },
@@ -146,6 +146,21 @@ export const LAYER_MAP = {
       color: 'rgba(0, 0, 0, 1)'
     },
     'text': 'Mines in the 90s',
+  },
+  'mines_2010s': {
+    'url': 'data/mines/2010s.topojson',
+    'style': {
+      color: 'rgba(0, 0, 0, 1)'
+    },
+    'format': 'TopoJSON',
+    'text': 'Mines in the 2010s',
+  },
+  'mines_2000s': {
+    'url': 'data/mines/2000s.geojson',
+    'style': {
+      color: 'rgba(0, 0, 0, 1)'
+    },
+    'text': 'Mines in the 2000s',
   }
   // 'corrientes': {
   //   'url': 'data/corrientes.geojson',
