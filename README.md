@@ -23,6 +23,21 @@ The server will be available on: http://localhost:8000/
 
 ### Intended usage
 
+This presentation is composed of 2 different parts:
+* A Map where you will see the different data evolves
+* An information card composed of 5 tabs:
+  * AOI: The area of interest with some extra information
+  * Agriculture: Emphasasing the agriculture activity consequences on the area
+  * Water: Showing the water presence and rivers in the area
+  * Mines: Understanding the forest destruction meant to mines exploitation
+  * Map Items: Where you will be able to display the several data
+
+By moving from one tab to another, the map adapts itself to display the interesting data
+related to the current tab category. The last tab: Map Items is a dashboard that allow you
+to independantly select the data and display them through a checkbox. Thanks to that, you can
+easilly overlaps several layers on the map in order to make your own conclusion.
+
+
 ## Hand ins
 
 ### Process Book (35%)
