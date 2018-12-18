@@ -28,6 +28,7 @@ export class RealMap {
         this.hideLayer(layerId);
       }
       $("#" + categoryId).addEventListener("change", e => {
+        categoryLayers = constants.CATEGORIES[categoryId];
         for (let layerId in categoryLayers) {
           this.toggleLayerOfCategory(layerId, categoryId);
         }

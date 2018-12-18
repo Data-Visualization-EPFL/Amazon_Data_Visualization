@@ -104,18 +104,21 @@ export const LAYER_MAP = {
   },
   'agricultura': {
     'text': 'Agricultura',
-    'style': null,
+    'url': 'data/land-use/agricultura.geojson',
+    'style': {
+        color: 'rgba(80, 30, 30, 1)' //'rgba(180, 180, 30, 1)'
+      }
   },
   'agua': {
     'text': 'Agua',
   },
-  'bosque-inundable': {
-    'url': 'data/land-use/bosque_inundable.geojson',
-    'style': {
-      color: 'rgba(40, 130, 190, 1)'
-    },
-    'text': 'Bosque inundable',
-  },
+  // 'bosque-inundable': {
+  //   'url': 'data/land-use/bosque_inundable.geojson',
+  //   'style': {
+  //     color: 'rgba(40, 130, 190, 1)'
+  //   },
+  //   'text': 'Bosque inundable',
+  // },
   'urbano': {
     'url': 'data/land-use/urbano.geojson',
     'style': {
@@ -135,14 +138,14 @@ export const LAYER_MAP = {
     'style': {
       color: 'rgba(0, 0, 0, 1)'
     },
-    'text': 'Mines 80s',
+    'text': 'Mines in the 80s',
   },
   'mines_90s': {
     'url': 'data/mines/90s.geojson',
     'style': {
       color: 'rgba(0, 0, 0, 1)'
     },
-    'text': 'Mines 90s',
+    'text': 'Mines in the 90s',
   }
   // 'corrientes': {
   //   'url': 'data/corrientes.geojson',

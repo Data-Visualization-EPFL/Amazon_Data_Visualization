@@ -35,4 +35,6 @@ routes = {
     "/data/land-use/bosque_inundable.geojson" : "data/land-use/bosque_inundable.geojson",
     "/data/land-use/urbano.geojson" : "data/land-use/urbano.geojson",
     "/data/land-use/mineria.geojson" : "data/land-use/mineria.geojson",
+    "/data/mines/80s.geojson" : "data/mines/80s.geojson",
+    "/data/mines/90s.geojson" : "data/mines/90s.geojson",
 }
