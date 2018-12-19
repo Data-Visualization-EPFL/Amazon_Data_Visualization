@@ -131,6 +131,9 @@ export class RealMap {
         this.hideLayer(layerId);
       }
     }
+    for (let layerId of ['mines_1980s', 'mines_1990s', 'mines_2000s', 'mines_2010s']) {
+      this.hideLayer(layerId);
+    }
     this.hideLayer("agua");
     this.hideLayer("mineria");
     switch (id) {
