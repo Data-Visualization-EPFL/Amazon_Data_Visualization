@@ -51,5 +51,10 @@ export function changeTab(event) {
     $("#" + el.id.split('-')[0] + "-tab").classList.remove("tab-active");
   });
   $("#" + event.target.id.split('-')[0] + "-content").removeAttribute("hidden");
+  // Update mines year content to be reset to 2000-2010
+  $all(".mines-year-content").forEach(el => el.hidden = true);
+  if (event.target.id.split('-')[0] = "mines") {
+    $("#mines-2000-2010").removeAttribute("hidden");
+  }
   event.target.classList.add("tab-active");
 }
