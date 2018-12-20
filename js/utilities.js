@@ -47,9 +47,9 @@ export function createInputList(el, layers) {
 
 export function changeTab(event) {
   $all(".tabcontent").forEach(el => {
-    el.style.display = "none";
+    el.hidden = true;
     $("#" + el.id.split('-')[0] + "-tab").classList.remove("tab-active");
   });
-  $("#" + event.target.id.split('-')[0] + "-content").style.display = "block";
+  $("#" + event.target.id.split('-')[0] + "-content").removeAttribute("hidden");
   event.target.classList.add("tab-active");
 }

@@ -66,7 +66,8 @@ export class RealMap {
         style: (feature, resolution) => {
           let styles = [
             new ol.style.Style({
-              fill: new ol.style.Stroke(category[id].style)
+              fill: new ol.style.Fill({ color: category[id].style.fill }),
+              stroke: category[id].style.stroke && new ol.style.Stroke({ color: category[id].style.stroke }),
             }),
           ];
 
@@ -130,6 +131,9 @@ export class RealMap {
         this.hideLayer(layerId);
       }
     }
+    for (let layerId of ['mines_1980s', 'mines_1990s', 'mines_2000s', 'mines_2010s']) {
+      this.hideLayer(layerId);
+    }
     this.hideLayer("agua");
     this.hideLayer("mineria");
     switch (id) {
@@ -153,7 +157,8 @@ export class RealMap {
 
       case "mines":
         this.showLayer("AOI-percountry");
-        for (let layerId in constants.CATEGORIES["mineria"]) {
+        $("#mines-slider").value = 2010;
+        for (let layerId of ['mines_1980s', 'mines_1990s', 'mines_2000s', 'mines_2010s']) {
           this.showLayer(layerId);
         }
         break;

@@ -37,6 +37,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 1000px;
+  max-height: 100%;
+  box-sizing: border-box;
   border-radius: 4px;
   padding: 1em 2em;
   background-color: rgba(255,255,255,0.95);
@@ -44,6 +46,8 @@ body {
   z-index: 1000;
   box-shadow: 0 4px 16px rgba(12,12,13,.5);
   display: none;
+  overflow: auto;
+  
 }
 
 .overlay-on::after {
@@ -124,9 +128,9 @@ header h1 {
 
 #legend {
   background-color: rgba(0,0,0,0.3);
-  min-width: 35%;
-  max-width: 35%;
-  padding: 0 1.1em 1em;
+  min-width: 525px;
+  width: 525px;
+  margin: 0;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -229,31 +233,17 @@ h2 {
   background: #2a2a2e;
 }
 
-.btn-error {
-  background: #ff0039;
-  color: #f9f9fa;
-}
-
-.btn-error:hover {
-  background: #d70022;
-}
-
-.btn-error:hover:active {
-  background: #a4000f;
-}
-
 .tab {
-    display: inline-flex;
-    justify-content: flex-start;
-    background-color: rgba(0,0,0,0.3);
-    width: auto;
-    position: sticky;
-    top: 0;
+  display: inline-flex;
+  justify-content: flex-start;
+  background-color: rgba(0,0,0,0.3);
+  position: sticky;
+  top: 0;
 }
 
 .tablinks {
   border: none;
-  font-size: 2em;
+  font-size: 1.5em;
   color: #ebebeb;
   background-color: transparent;
   padding: 15px 20px;
@@ -264,6 +254,10 @@ h2 {
   background-color: rgba(0,0,0,0.6);
   padding: 1em 1.5em;
   font-size: 1.1em;
+}
+
+.tabcontent[hidden] {
+  display: none !important;
 }
 
 .tabcontent p {
@@ -278,6 +272,45 @@ h2 {
 
 #categories label {
   font-size: 1.4em;
+}
+
+#mines-content {
+  display: flex;
+}
+
+#mines-slider {
+  margin-left: 20px;
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* WebKit */
+  width: 8px;
+  height: 100%;
+  position: sticky;
+  top: 0;
+  --notch-size: 3px;
+  --num-steps: 3;
+  /* Draw a vertical line to get one notch per background-image instance */
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.5) var(--notch-size),
+   transparent 0);
+  /* Offset the background so the notch aligns with the center of the slider thumb */
+  background-position: center 0;
+  /* Repeat the background-image horizontally */
+  background-repeat: repeat-y;
+  /* Size the background to get nine visible notch instances. */
+  background-size: 10px calc(calc(100% / var(--num-steps)) - var(--notch-size) / 2);
+  background-color: rgba(255,255,255,0.3);
+}
+
+#mines-timestamps {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  height: 100%;
+  position: sticky;
+  top: 0;
+}
+
+#mines-timestamps p {
+  margin: 0;
 }
 
 /* Toggles */
@@ -304,9 +337,6 @@ h2 {
 }
 
 /* Sliders */
-#slider-mines-time {
-  width: 30%;
-}
 
 .slider {
   -webkit-appearance: none;
@@ -314,19 +344,6 @@ h2 {
   width: 100%;
   height: 10px;
   margin: 0;
-  --notch-size: 3px;
-  --num-steps: 0;
-  /* Draw a vertical line to get one notch per background-image instance */
-  background-image: linear-gradient(90deg, rgba(255,255,255,0.5) var(--notch-size),
-   transparent 0);
-  /* Offset the background so the notch aligns with the center of the slider thumb */
-  background-position: 5px center;
-  /* Repeat the background-image horizontally */
-  background-repeat: repeat-x;
-  /* Size the background to get nine visible notch instances. */
-  /* background-size: calc(calc(100% / var(--num-steps)) - var(--notch-size) / 2) 10px; */
-  background-size: 95% 10px;
-  background-color: black;
   outline: none;
   cursor: pointer;
 }
